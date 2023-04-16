@@ -12,7 +12,7 @@ import UserState from '../integracao/UserState';
 const theme = createTheme({
 palette: {
     primary: {
-            main: '#f4900c',
+            main: '#083E57',
         },
     },
 });

@@ -10,6 +10,7 @@ import ClientRest from "../../integracao/ClientRest";
 import { MdUsuarioLogado } from "../../modelos/importarBack/MdUsuarioLogado";
 import UserState from "../../integracao/UserState";
 
+
 const EncVnTextField = styled(TextField)({
     '& input + fieldset': {
         outerWidth: 340,
@@ -91,8 +92,13 @@ const Entrar = () => {
 
     return (
         <>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nova+Oval"></link>
+            <div id='background'>
+                <img src="public\assets\logo_navio-removebg-preview.png"/>
+            </div>
+
             <div className='titulo-wrapper'>
-                <h1>ENCOURAÇADO VALENTE</h1>
+                <h1>BATTLE OF OCEAN</h1>
             </div>
             <div className="d-flex justify-content-center">
                 <div className="col-6 pe-3">

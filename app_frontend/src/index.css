@@ -5,9 +5,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0px;
-  background-image: url('../public/assets/fundo_entrar_enc_vn.png');
-  background-size: cover;
-  background-repeat: no-repeat;
+  /*background-image: url('../public/assets/5-removebg-preview.png');*/
+  background-size: 50%;
+  background-repeat: repeat;
   height: 100%;
   overflow-x: hidden;
 }

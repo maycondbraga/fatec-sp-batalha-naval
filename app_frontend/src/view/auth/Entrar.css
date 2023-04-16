@@ -20,14 +20,14 @@
 }
 .titulo-wrapper h1 {
     margin: 0;
-    color: #f4900c;
-    font-family: 'Bungee';
+    color: #083e57;
+    font-family: 'Nova Oval',cursive;
     text-align: center;
     text-shadow: 0px 2px rgb(80, 80, 80);
 }
 
 .subtitulo {
     margin: 0;
-    font-family: 'Bungee';
+    font-family: 'Nova Oval',cursive;
     text-align: center;
 }
