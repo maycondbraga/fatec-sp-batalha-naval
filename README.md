@@ -15,6 +15,11 @@ Aplicação WEB referente ao game Battle of Ocean desenvolvido pelos alunos da F
 
 ## Como iniciar
 
+Fazer clonagem do repositório para máquina pessoal:
+```
+git clone https://github.com/maycondbraga/fatec-sp-batalha-naval.git
+```
+
 #### Backend - Servidor
 
 - Abrir novo CMD na pasta <code><diretorio_raiz>/app_backend</code>
