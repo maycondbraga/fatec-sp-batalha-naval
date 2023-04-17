@@ -15,3 +15,18 @@ Aplicação WEB referente ao game Battle of Ocean desenvolvido pelos alunos da F
 
 ## Como iniciar
 
+#### Backend - Servidor
+
+- Abrir novo CMD na pasta <code><diretorio_raiz>/app_backend</code>
+- Digitar os comandos na seguinte ordem:
+    - <code>npm i</code>
+    - <code>npm run dev</code>
+- O servidor será iniciado, e aparecerá no prompt de comando a URL Localhost onde o servidor foi iniciado
+
+#### Frontend - Tela Cliente
+
+- Abrir novo CMD na pasta <code><diretorio_raiz>/app_frontend</code>
+- Digitar os comandos na seguinte ordem:
+    - <code>npm i</code>
+    - <code>npm run start</code>
+- O frontend será iniciado. A página WEB deverá ser inicializada automaticamente no seu navegador padrão
