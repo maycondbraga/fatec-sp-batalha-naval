@@ -58,9 +58,9 @@ const Header = (props: HeaderProps) => {
     const definePages = () => {
         if (loggedIn) {
             if (userState.localStorageUser?.eSuperuser)
-                return [{label: 'Loja', href: 'loja'}, {label: 'Mochila', href: 'mochila'}, {label: 'Liberação', href: 'liberacao'}];
+                return [{label: 'Store', href: 'loja'}, {label: 'Inventário', href: 'mochila'}, {label: 'Admin Store', href: 'liberacao'}];
             else
-                return [{label: 'Loja', href: 'loja'}, {label: 'Mochila', href: 'mochila'}];
+                return [{label: 'Store', href: 'loja'}, {label: 'Inventário', href: 'mochila'}];
         }
         return [];
     }
@@ -80,7 +80,7 @@ const Header = (props: HeaderProps) => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <DirectionsBoatFilledOutlinedIcon  sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/*<DirectionsBoatFilledOutlinedIcon  sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />*/}
                     <Typography
                         variant="h6"
                         noWrap
@@ -89,13 +89,13 @@ const Header = (props: HeaderProps) => {
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'Bungee',
+                            fontFamily: 'Righteous',
                             fontWeight: 700,
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        Jogar
+                        Em Construção
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -147,7 +147,7 @@ const Header = (props: HeaderProps) => {
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'Bungee',
+                            fontFamily: 'Righteous',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
                             color: 'inherit',
@@ -163,7 +163,7 @@ const Header = (props: HeaderProps) => {
                                     onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
-                                    <Link style={{ textDecoration: "none", color: "white", fontFamily: "Bungee"}} to={`/${page.href}`}>{page.label}</Link>
+                                    <Link style={{ textDecoration: "none", color: "white", fontFamily: "Righteous"}} to={`/${page.href}`}>{page.label}</Link>
                                 </Button>
                             ))}
                         </Box>               
@@ -172,20 +172,22 @@ const Header = (props: HeaderProps) => {
                         noWrap
                         sx={{
                             mr: 2,
-                            fontFamily: 'Bungee',
+                            fontFamily: 'Righteous',
                             fontWeight: 700,
                             letterSpacing: '.1rem',
                             color: 'white',
                             textDecoration: 'none',
                         }}
                     >
-                        {loggedIn ? ( 'Bem Vindo, ' + props.username.split(' ')[0]) : 'Entre, convidado'}
+                        {/*loggedIn ? ( 'Bem Vindo, ' + props.username.split(' ')[0]) : 'Entre, convidado'*/}
+                        {loggedIn ? ( props.username.split(' ')[0]) : 'Entrar'}
                     </Typography>
                     
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings"> 
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Profile pic" src="https://static.vecteezy.com/ti/vetor-gratis/p3/4305899-marinheiro-plano-ilustracao-maritimo-academia-marinheiro-em-trabalho-uniforme-marinho-ocupacao-marinheiro-com-corda-isolado-personagem-de-desenho-animado-fundo-branco-vetor.jpg" />
+                                {/*<Avatar alt="Profile pic" src="https://static.vecteezy.com/ti/vetor-gratis/p3/4305899-marinheiro-plano-ilustracao-maritimo-academia-marinheiro-em-trabalho-uniforme-marinho-ocupacao-marinheiro-com-corda-isolado-personagem-de-desenho-animado-fundo-branco-vetor.jpg" />*/}
+                                <Avatar alt="Profile pic" src="/assets/Avatar2.png" />
                             </IconButton>
                         </Tooltip>
                         <Menu

@@ -39,7 +39,7 @@ const GoogleAuthBotao = () => {
     })
 
     return (
-        <Button variant="outlined" size="medium" className="mt-4" sx={{ width: 200 }} onClick={() => login()}>Entrar com google</Button>
+        <Button variant="outlined" size="medium" className="invisible mt-4" sx={{ width: 200 }} onClick={() => login()}>Entrar com google</Button>
     )
 }
 

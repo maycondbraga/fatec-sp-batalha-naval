@@ -146,8 +146,18 @@ export default function ListagemSalas(props: ListagemSalasProps) {
   }
   
   return (
+
     <main>
-      <Container sx={{ mt: 8, py: 1, bgcolor: 'white', borderRadius: '1%' }} maxWidth="md">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
+      <Typography sx={{ fontFamily: 'Righteous' }}
+          mt='30px'
+          variant="h1"
+          align="center"
+          color="#083E57"
+        >
+          EM CONSTRUÇÃO
+      </Typography>
+      <Container className='invisible' sx={{ mt: 8, py: 1, bgcolor: 'white', borderRadius: '1%' }} maxWidth="md">
         <Typography sx={{ fontFamily: 'Bungee' }}
           mt='20px'
           variant="h4"
