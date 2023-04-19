@@ -95,7 +95,7 @@ const Header = (props: HeaderProps) => {
                             textDecoration: 'none',
                         }}
                     >
-                        Em Construção
+                        Jogar
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
