@@ -99,7 +99,6 @@ const Entrar = () => {
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
                 <div>
                     <div className='titulo-wrapper'>
-                        {/* <h1>BATTLE OF OCEAN</h1> */}
                         <img id='logo-entrar' src="/assets/logo_navio-removebg-preview.png" />
                     </div>
                     <div className="d-flex justify-content-center">
