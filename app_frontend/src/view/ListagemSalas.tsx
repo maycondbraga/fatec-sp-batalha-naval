@@ -146,7 +146,9 @@ export default function ListagemSalas(props: ListagemSalasProps) {
   }
   
   return (
+
     <main>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
       <Container sx={{ mt: 8, py: 1, bgcolor: 'white', borderRadius: '1%' }} maxWidth="md">
         <Typography sx={{ fontFamily: 'Bungee' }}
           mt='20px'

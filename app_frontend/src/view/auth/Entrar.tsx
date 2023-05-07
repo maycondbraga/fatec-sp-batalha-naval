@@ -14,8 +14,12 @@ import UserState from "../../integracao/UserState";
 const EncVnTextField = styled(TextField)({
     '& input + fieldset': {
         outerWidth: 340,
-        borderColor: '#505050',
+        borderColor: '#ccc',
         borderWidth: 2,
+        borderRadius:'10px',
+        /*A primeira implementação da linha abaixo fez com
+        que a fonte dentro do input sumisse. Ponto a ver posteriormente.*/
+        /*backgroundColor: 'white',*/
     }
 });
 
@@ -92,47 +96,45 @@ const Entrar = () => {
 
     return (
         <>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nova+Oval"></link>
-            <div id='background'>
-                <img src="public\assets\logo_navio-removebg-preview.png"/>
-            </div>
-
-            <div className='titulo-wrapper'>
-                <h1>BATTLE OF OCEAN</h1>
-            </div>
-            <div className="d-flex justify-content-center">
-                <div className="col-6 pe-3">
-                    {eTelaEntrar ?
-                        <Card>
-                            <CardContent>
-                                <h3 className="subtitulo">ENTRAR</h3>
-                                <div className="d-flex flex-column align-items-center">
-                                    <EncVnTextField label="Email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmail(ev.target.value)} value={email} />
-                                    <EncVnTextField label="Senha" type="password" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeSenha(ev.target.value)} value={senha} />
-                                    <Button variant="contained" size="medium" className="mt-4" sx={{ width: 200 }} onClick={() => handleClickEntrarUsuarioEncVn()}>Entrar</Button>
-                                    <GoogleAuthBotao />
-                                </div>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="medium" onClick={() => handleClickCriarConta()}>Criar uma nova conta</Button>
-                            </CardActions>
-                        </Card> :
-                        <Card>
-                            <CardContent>
-                                <h3 className="subtitulo">CADASTRAR</h3>
-                                <div className="d-flex flex-column align-items-center">
-                                    <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeNomeCadastro(ev.target.value)} value={nomeCadastro} />
-                                    <EncVnTextField label="Email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmailCadastro(ev.target.value)} value={emailCadastro} />
-                                    <EncVnTextField label="Senha" type="password" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeSenhaCadastro(ev.target.value)} value={senhaCadastro} />
-                                    <Button variant="contained" size="medium" className="mt-4" sx={{ width: 200 }} onClick={() => handleClickCriarContaCadastro()}>Criar a conta</Button>
-                                </div>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="medium" onClick={() => handleClickJaTenhoContaCadastro()}>Já tenho uma conta</Button>
-                            </CardActions>
-                        </Card>}
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
+                <div>
+                    <div className='titulo-wrapper'>
+                        <img id='logo-entrar' src="/assets/logo_navio-removebg-preview.png" />
+                    </div>
+                    <div className="d-flex justify-content-center">
+                        <div className="col-6 pe-3">
+                            {eTelaEntrar ?
+                                <Card className="shadow-none">
+                                    <CardContent>
+                                        <h3 className="subtitulo">LOGIN</h3>
+                                        <div className="d-flex flex-column align-items-center">
+                                            <EncVnTextField label="Email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmail(ev.target.value)} value={email} />
+                                            <EncVnTextField label="Senha" type="password" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeSenha(ev.target.value)} value={senha} />
+                                            <Button variant="contained" size="medium" className="mt-4" sx={{ width: 200 }} onClick={() => handleClickEntrarUsuarioEncVn()}>Entrar</Button>
+                                            <GoogleAuthBotao />
+                                        </div>
+                                    </CardContent>
+                                    <CardActions className="d-flex justify-content-center">
+                                        <Button size="medium" onClick={() => handleClickCriarConta()}>Novo por aqui? Cadastre-se já!</Button>
+                                    </CardActions>
+                                </Card> :
+                                <Card className="shadow-none">
+                                    <CardContent>
+                                        <h3 className="subtitulo">CADASTRAR</h3>
+                                        <div className="d-flex flex-column align-items-center">
+                                            <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeNomeCadastro(ev.target.value)} value={nomeCadastro} />
+                                            <EncVnTextField label="Email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmailCadastro(ev.target.value)} value={emailCadastro} />
+                                            <EncVnTextField label="Senha" type="password" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeSenhaCadastro(ev.target.value)} value={senhaCadastro} />
+                                            <Button variant="contained" size="medium" className="mt-4" sx={{ width: 200 }} onClick={() => handleClickCriarContaCadastro()}>Criar a conta</Button>
+                                        </div>
+                                    </CardContent>
+                                    <CardActions className="d-flex justify-content-center">
+                                        <Button size="medium" onClick={() => handleClickJaTenhoContaCadastro()}>Logar com uma conta existente</Button>
+                                    </CardActions>
+                                </Card>}
+                        </div>
+                    </div>
                 </div>
-            </div>
             <ErroModal estaAberto={erroEstaAberto} onFechar={handleFecharErro} problema={problemaErro} />
         </>
     )
