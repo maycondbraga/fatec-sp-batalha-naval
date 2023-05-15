@@ -79,7 +79,7 @@ mongoose.connect(configBack.conexaoMongodb, { dbName: 'EncVn' })
     
     const portaDoHost = parseInt(configBack.hostDoBackend?.substring(configBack.hostDoBackend.indexOf(':') + 1));
     const server = app.listen(process.env.PORT || portaDoHost, () => {
-      console.log('🚀 Servidor escutando na url: http://' + configBack.hostDoBackend);
+      console.log('🚀 Servidor escutando na url: ' + configBack.hostDoBackend);
     });
     
     const getWsServer = (server: Server, path = '/ws') => new WebSocketServer({ server, path });
