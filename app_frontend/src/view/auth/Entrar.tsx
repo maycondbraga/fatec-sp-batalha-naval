@@ -9,7 +9,25 @@ import { PostLoginUsuario } from "../../modelos/importarBack/PostLoginUsuario";
 import ClientRest from "../../integracao/ClientRest";
 import { MdUsuarioLogado } from "../../modelos/importarBack/MdUsuarioLogado";
 import UserState from "../../integracao/UserState";
+import Swal from 'sweetalert2'
 
+
+function IsEmail(validarEmail: string){
+    var exclude=/\[^@-.w]|^[_@.-]|[._-]{2}|[@.]{2}|(@)[^@]*1/;
+    var check=/\@[w-]+./;
+    var checkend=/\.[a-zA-Z]{2,3}$/;
+    if(((validarEmail.search(exclude) != -1)||(validarEmail.search(check)) == -1)||(validarEmail.search(checkend) == -1)){return false;}
+    else {return true;}
+}
+
+function FuncaoValidarEmail(email: string) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+
+  function FuncaoValidarNome(nomeV: string){
+    return !nomeV.match(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/);
+}
 
 const EncVnTextField = styled(TextField)({
     '& input + fieldset': {
@@ -49,6 +67,7 @@ const Entrar = () => {
         loginUsuario.email = email;
         loginUsuario.senha = senha;
         const respostaLogin = await clientRest.callPost<MdUsuarioLogado>('/api/autorizacao/entrarUsuarioEncVn', loginUsuario, new MdUsuarioLogado());
+        
         if (respostaLogin.eOk) {
             userState.localStorageUser = respostaLogin.body;
             navigate('/');
@@ -71,24 +90,55 @@ const Entrar = () => {
         setNomeCadastro(_ => arg);
     }
     const handleChangeEmailCadastro = (arg: string) => {
-        setEmailCadastro(_ => arg);
-    }
+        setEmailCadastro(_ => arg);}
+
     const handleChangeSenhaCadastro = (arg: string) => {
         setSenhaCadastro(_ => arg);
     }
     const handleClickCriarContaCadastro = async () => {
+
+  
         let cadastroUsuario = new PostCadastroUsuario();
         cadastroUsuario.nome = nomeCadastro;
         cadastroUsuario.email = emailCadastro;
+        let validarEmail = cadastroUsuario.email;
+        let validarNome = cadastroUsuario.nome;
+
+        if(FuncaoValidarNome(validarNome)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: '<strong>Nome Invalido</strong></br>O nome não pode conter números <br>ou caracteres especiais(ex: @$%)',
+                //footer: '<a href="">Deseja voltar para a pagina de Login?</a>'
+              })
+            return
+        }
+        if(!(FuncaoValidarEmail(validarEmail))){
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: 'Email Invalido',
+                //footer: '<a href="">Deseja voltar para a pagina de Login?</a>'
+              })
+            return
+        }
+
+        cadastroUsuario.nome = nomeCadastro;
+        cadastroUsuario.email = emailCadastro;
         cadastroUsuario.senha = senhaCadastro;
+        
         const respostaCadastro = await clientRest.callPost<MdUsuarioLogado>('/api/autorizacao/cadastrarUsuarioEncVn', cadastroUsuario, new MdUsuarioLogado());
+
+       
         if (respostaCadastro.eOk) {
             userState.localStorageUser = respostaCadastro.body;
-            navigate('/');
+            setETelaEntrar(_ => true);
         } else {
             setProblemaErro(_ => respostaCadastro.problema);
             setErroEstaAberto(_ => true);
         }
+
     }
     const handleClickJaTenhoContaCadastro = () => {
         setETelaEntrar(_ => true);
@@ -98,8 +148,9 @@ const Entrar = () => {
         <>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
                 <div>
-                    <div className='titulo-wrapper'>
-                        {/* <h1>BATTLE OF OCEAN</h1> */}
+                    
+                    <div className='titulo-wrapper'> 
+
                         <img id='logo-entrar' src="/assets/logo_navio-removebg-preview.png" />
                     </div>
                     <div className="d-flex justify-content-center">
@@ -124,7 +175,7 @@ const Entrar = () => {
                                         <h3 className="subtitulo">CADASTRAR</h3>
                                         <div className="d-flex flex-column align-items-center">
                                             <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeNomeCadastro(ev.target.value)} value={nomeCadastro} />
-                                            <EncVnTextField label="Email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmailCadastro(ev.target.value)} value={emailCadastro} />
+                                            <EncVnTextField label="Email" type="email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmailCadastro(ev.target.value)} value={emailCadastro} />
                                             <EncVnTextField label="Senha" type="password" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeSenhaCadastro(ev.target.value)} value={senhaCadastro} />
                                             <Button variant="contained" size="medium" className="mt-4" sx={{ width: 200 }} onClick={() => handleClickCriarContaCadastro()}>Criar a conta</Button>
                                         </div>
@@ -135,10 +186,11 @@ const Entrar = () => {
                                 </Card>}
                         </div>
                     </div>
-                </div>
+                </div> 
             <ErroModal estaAberto={erroEstaAberto} onFechar={handleFecharErro} problema={problemaErro} />
         </>
     )
+
 }
 
 export default Entrar
