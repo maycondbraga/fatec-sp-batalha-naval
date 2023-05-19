@@ -9,7 +9,7 @@ import { PostLoginUsuario } from "../../modelos/importarBack/PostLoginUsuario";
 import ClientRest from "../../integracao/ClientRest";
 import { MdUsuarioLogado } from "../../modelos/importarBack/MdUsuarioLogado";
 import UserState from "../../integracao/UserState";
-import Swal from 'sweetalert2'
+
 
 
 function IsEmail(validarEmail: string){
