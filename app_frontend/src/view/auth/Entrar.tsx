@@ -105,23 +105,15 @@ const Entrar = () => {
         let validarNome = cadastroUsuario.nome;
 
         if(FuncaoValidarNome(validarNome)){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                html: '<strong>Nome Invalido</strong></br>O nome não pode conter números <br>ou caracteres especiais(ex: @$%)',
-                //footer: '<a href="">Deseja voltar para a pagina de Login?</a>'
-              })
-            return
+            setProblemaErro(_ => 'O nome não pode ter números ou caracteres especiais.');
+            setErroEstaAberto(_ => true);
+            return;
         }
         if(!(FuncaoValidarEmail(validarEmail))){
             
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                html: 'Email Invalido',
-                //footer: '<a href="">Deseja voltar para a pagina de Login?</a>'
-              })
-            return
+            setProblemaErro(_ => 'O email está no formato inválido.');
+            setErroEstaAberto(_ => true);
+            return;
         }
 
         cadastroUsuario.nome = nomeCadastro;
