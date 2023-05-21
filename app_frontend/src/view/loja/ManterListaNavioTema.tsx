@@ -82,9 +82,9 @@ const ManterListaNavioTema = (props: ManterListaNavioTemaProps) => {
                     <Table sx={{ minWidth: 650 }} size="small" aria-label="Lista de personalizações">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Navio OG</TableCell>
+                                <TableCell>Tamanho Peças</TableCell>
                                 <TableCell align="right">Nome</TableCell>
-                                <TableCell align="right">Tamanho (qtd.)</TableCell>
+                                <TableCell align="right">Tamanho (quantidade)</TableCell>
                                 <TableCell align="right">Imagem</TableCell>
                                 <TableCell align="right"></TableCell>
                                 <TableCell align="right"></TableCell>
