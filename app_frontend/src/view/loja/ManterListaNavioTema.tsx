@@ -49,8 +49,9 @@ const ManterListaNavioTema = (props: ManterListaNavioTemaProps) => {
         }
     }, [idxNavioTemaAlteracaoPendente]);
 
-    const handleClickExcluir = (idxNavioTema: number, tamNavio: number): void => {
+    const handleClickExcluir = (idxNavioTema: number, tamNavio: number, nomeNavio: string): void => {
         props.setLNaviosTema(_ => props.lNaviosTema.filter((el, idxEl) => idxEl != idxNavioTema));
+        sessionStorage.removeItem(nomeNavio);
         // updateNaviosAdicionados(arr => arr.filter((item) => item != tamNavio))
     }
 
@@ -119,7 +120,7 @@ const ManterListaNavioTema = (props: ManterListaNavioTemaProps) => {
                                     </Button>}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {!props.eListaBloqueada && <Button onClick={() => handleClickExcluir(idxNavioTema, elNavioTema.tamnQuadrados)}>
+                                    {!props.eListaBloqueada && <Button onClick={() => handleClickExcluir(idxNavioTema, elNavioTema.tamnQuadrados, elNavioTema.nomePersonalizado)}>
                                         <DeleteOutlinedIcon color="error" className="me-3" />
                                     </Button>}
                                 </TableCell>

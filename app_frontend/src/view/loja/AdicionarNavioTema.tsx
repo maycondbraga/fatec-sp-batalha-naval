@@ -12,8 +12,6 @@ import { LiteralNavio } from '../../modelos/LiteralNavio';
 import { StringUteis } from '../../util/StringUteis';
 import { UtilNumber } from '../../util/UtilNumber';
 
-
-var nomesNavios: Array<string> = []
 const EncVnTextField = styled(TextField)({
     '& input + fieldset': {
         outerWidth: 340,
@@ -96,22 +94,17 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
 
         let novoNavioTema = new MdDetalheNavioTema();
         novoNavioTema.tamnQuadrados = tamnQuadradosAsNumber;
-        novoNavioTema.nomePersonalizado = nomePersonalizado;
+        novoNavioTema.nomePersonalizado = nomePersonalizado.toLowerCase();
         novoNavioTema.numeroRecuperacaoArquivoImagemNavio = numeroRecuperacaoImagem;
         novoNavioTema.bytesParaUploadArquivo = bytesImagem;
 
-
-
-        for(var i = 0;i<nomesNavios.length;i++){
-            if (novoNavioTema.nomePersonalizado == nomesNavios[i]){
-                setProblemaErro(_ => 'Os navios não podem ter o mesmo nome.');
-                setErroEstaAberto(_ => true);
+        if (sessionStorage.getItem(novoNavioTema.nomePersonalizado) == novoNavioTema.nomePersonalizado){
+            setProblemaErro(_ => 'Os navios não podem ter o mesmo nome.');
+            setErroEstaAberto(_ => true);
             return;
-            }   
         }
-        
-        nomesNavios.push(nomePersonalizado)
-        console.log(nomesNavios)
+
+        sessionStorage.setItem(novoNavioTema.nomePersonalizado, novoNavioTema.nomePersonalizado);
         props.onSalvar(novoNavioTema);
         }
     return (
@@ -188,11 +181,4 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
     )
 }
 
-
 export default AdicionarNavioTema
-
-nomesNavios.pop()
-nomesNavios.pop()
-nomesNavios.pop()
-nomesNavios.pop()
-

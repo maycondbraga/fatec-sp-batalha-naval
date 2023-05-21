@@ -449,11 +449,10 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
     return (
         <div>
             <div className='titulo-wrapper'>
-                <h1>ENCOURAÇADO VALENTE</h1>
+                <h1>HORA DE PREPARAR SEU TABULEIRO</h1>
             </div>
             <div className="container-tabuleiros">
                 {!estaEsperando && <>
-                    <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>HORA DE PREPARAR A SUA ESTRATÉGIA</Typography>
                     <div style={{ alignContent: 'center', paddingLeft: '5%', display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
                         <div>
                             <Tooltip title={tooltipTamn1 + " - 1 posição"} arrow>
