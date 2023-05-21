@@ -445,7 +445,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
     return (
         <div>
             <div className='titulo-wrapper'>
-                <h1>ENCOURAÇADO VALENTE</h1>
+                <h1>BATTLE OF OCEAN</h1>
             </div>
             <div className="container-tabuleiros">
                 {!estaEsperando && <>
@@ -454,9 +454,10 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
                         <div>
                             <Tooltip title={tooltipTamn1 + " - 1 posição"} arrow>
                                 <img id="barcoPequeno1"
-                                    ref={barcoPequenoRef1}
+                                    
                                     style={{ height: '30px', width: calculaWidth(1), cursor: 'pointer' }}
                                     src={temaBarcoPequenoSrc}
+                                    ref={barcoPequenoRef1}
                                     onClick={() => !idBarcosSelecionados.includes('barcoPequeno1') && handleBarcoOnClick(barcoPequenoRef1, 1)} />
                             </Tooltip>
 

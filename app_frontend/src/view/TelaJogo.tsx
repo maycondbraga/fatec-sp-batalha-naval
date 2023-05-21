@@ -60,8 +60,8 @@ const TelaJogo = (props: TelaJogoProps) => {
 
     const posicoesJaMarcadas: Array<string> = []
     const musicaJogo = useMemo(() => new Audio('/assets/music.mp3'), [])
-    const somAcertouHit = useMemo(() => new Audio('/assets/HitExplosion.mp3'), [])
-    const somErrouHit = useMemo(() => new Audio('/assets/SplashSound.mp3'), [])
+    const somAcertouHit = useMemo(() => new Audio('/assets/tomi.mp3'), [])
+    const somErrouHit = useMemo(() => new Audio('/assets/errou.mp3'), [])
 
     const navigate = useNavigate();
     const { roomId } = useParams()
@@ -127,6 +127,7 @@ const TelaJogo = (props: TelaJogoProps) => {
 
     useEffect(() => {
         musicaJogo.loop = true;
+        musicaJogo.volume = 0.20;
         musicaJogo.play();
         return () => {
             musicaJogo.pause();
@@ -401,7 +402,7 @@ const TelaJogo = (props: TelaJogoProps) => {
     return (
         <div>
             <div className='titulo-wrapper'>
-                <h1>ENCOURAÇADO VALENTE</h1>
+                <h1>BATTLE OF OCEAN</h1>
             </div>
             <div className="container-tabuleiros">
                 <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>É HORA DO ATAQUE</Typography>
