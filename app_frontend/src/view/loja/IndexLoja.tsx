@@ -104,7 +104,7 @@ const IndexLoja = () => {
     
     return (
         <div>
-            <h1 style={{color: 'white', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Loja</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Store</h1>
             {!carregouTemas && <div className='d-flex justify-content-center w-100'>
                 <CircularProgress />
             </div>}
@@ -156,7 +156,7 @@ const IndexLoja = () => {
                     <WhitePagination color='standard' variant='outlined' count={qtPaginas} page={pagina} onChange={(ev, pgn) => setPagina(_ => pgn)} />
                 </div>
             </>}
-            {carregouTemas && lTemas.length == 0 && <span style={{color: 'white'}}>Nenhum tema adicionado ainda.</span>}
+            {carregouTemas && lTemas.length == 0 && <span style={{color: 'black', fontFamily: 'bungee', display: 'block', textAlign: 'center', marginTop: '30px' }}>Nenhum tema adicionado ainda.</span>}
            {(userState.localStorageUser?.eSuperuser ?? true) && <FormGroup>
             <div className="d-flex justify-content-center pt-4">
                 <Fab size="medium" variant='extended'  onClick={() => navigate('/loja/adicionarTema')}> Adicionar tema <AddIcon sx={{mr: 1}} style={{marginBottom: '5px'}}/></Fab>

@@ -401,7 +401,7 @@ const TelaJogo = (props: TelaJogoProps) => {
     return (
         <div>
             <div className='titulo-wrapper'>
-                <h1>ENCOURAÇADO VALENTE</h1>
+                <h1>Battle of Ocean</h1>
             </div>
             <div className="container-tabuleiros">
                 <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>É HORA DO ATAQUE</Typography>

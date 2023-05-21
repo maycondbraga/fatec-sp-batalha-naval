@@ -11,6 +11,24 @@ import { MdUsuarioLogado } from "../../modelos/importarBack/MdUsuarioLogado";
 import UserState from "../../integracao/UserState";
 
 
+
+function IsEmail(validarEmail: string){
+    var exclude=/\[^@-.w]|^[_@.-]|[._-]{2}|[@.]{2}|(@)[^@]*1/;
+    var check=/\@[w-]+./;
+    var checkend=/\.[a-zA-Z]{2,3}$/;
+    if(((validarEmail.search(exclude) != -1)||(validarEmail.search(check)) == -1)||(validarEmail.search(checkend) == -1)){return false;}
+    else {return true;}
+}
+
+function FuncaoValidarEmail(email: string) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+
+  function FuncaoValidarNome(nomeV: string){
+    return !nomeV.match(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/);
+}
+
 const EncVnTextField = styled(TextField)({
     '& input + fieldset': {
         outerWidth: 340,
@@ -49,6 +67,7 @@ const Entrar = () => {
         loginUsuario.email = email;
         loginUsuario.senha = senha;
         const respostaLogin = await clientRest.callPost<MdUsuarioLogado>('/api/autorizacao/entrarUsuarioEncVn', loginUsuario, new MdUsuarioLogado());
+        
         if (respostaLogin.eOk) {
             userState.localStorageUser = respostaLogin.body;
             navigate('/');
@@ -71,24 +90,47 @@ const Entrar = () => {
         setNomeCadastro(_ => arg);
     }
     const handleChangeEmailCadastro = (arg: string) => {
-        setEmailCadastro(_ => arg);
-    }
+        setEmailCadastro(_ => arg);}
+
     const handleChangeSenhaCadastro = (arg: string) => {
         setSenhaCadastro(_ => arg);
     }
     const handleClickCriarContaCadastro = async () => {
+
+  
         let cadastroUsuario = new PostCadastroUsuario();
         cadastroUsuario.nome = nomeCadastro;
         cadastroUsuario.email = emailCadastro;
+        let validarEmail = cadastroUsuario.email;
+        let validarNome = cadastroUsuario.nome;
+
+        if(FuncaoValidarNome(validarNome)){
+            setProblemaErro(_ => 'O nome não pode ter números ou caracteres especiais.');
+            setErroEstaAberto(_ => true);
+            return;
+        }
+        if(!(FuncaoValidarEmail(validarEmail))){
+            
+            setProblemaErro(_ => 'O email está no formato inválido.');
+            setErroEstaAberto(_ => true);
+            return;
+        }
+
+        cadastroUsuario.nome = nomeCadastro;
+        cadastroUsuario.email = emailCadastro;
         cadastroUsuario.senha = senhaCadastro;
+        
         const respostaCadastro = await clientRest.callPost<MdUsuarioLogado>('/api/autorizacao/cadastrarUsuarioEncVn', cadastroUsuario, new MdUsuarioLogado());
+
+       
         if (respostaCadastro.eOk) {
             userState.localStorageUser = respostaCadastro.body;
-            navigate('/');
+            setETelaEntrar(_ => true);
         } else {
             setProblemaErro(_ => respostaCadastro.problema);
             setErroEstaAberto(_ => true);
         }
+
     }
     const handleClickJaTenhoContaCadastro = () => {
         setETelaEntrar(_ => true);
@@ -123,7 +165,7 @@ const Entrar = () => {
                                         <h3 className="subtitulo">CADASTRAR</h3>
                                         <div className="d-flex flex-column align-items-center">
                                             <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeNomeCadastro(ev.target.value)} value={nomeCadastro} />
-                                            <EncVnTextField label="Email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmailCadastro(ev.target.value)} value={emailCadastro} />
+                                            <EncVnTextField label="Email" type="email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmailCadastro(ev.target.value)} value={emailCadastro} />
                                             <EncVnTextField label="Senha" type="password" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeSenhaCadastro(ev.target.value)} value={senhaCadastro} />
                                             <Button variant="contained" size="medium" className="mt-4" sx={{ width: 200 }} onClick={() => handleClickCriarContaCadastro()}>Criar a conta</Button>
                                         </div>
@@ -134,10 +176,11 @@ const Entrar = () => {
                                 </Card>}
                         </div>
                     </div>
-                </div>
+                </div> 
             <ErroModal estaAberto={erroEstaAberto} onFechar={handleFecharErro} problema={problemaErro} />
         </>
     )
+
 }
 
 export default Entrar

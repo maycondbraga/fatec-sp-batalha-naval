@@ -129,7 +129,7 @@ class TemaController extends ControllerBase {
         if (novoTema.nome.length == 0) {
             camposNulos.push('Nome');
         }
-        if (novoTema.preco == null || novoTema.preco <= 0) {
+        if (novoTema.preco == null || novoTema.preco < 0) {
             camposNulos.push('Preço');
         }
         if (novoTema.descricao.length == 0) {
