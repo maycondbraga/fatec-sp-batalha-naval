@@ -9,10 +9,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID as string}>
-    <div id='background'>
+    {/* <div id='background'>
       <img id='logo-entrar' src="/assets/Design_sem_nome__1_-removebg-preview.png" />
       <img id='logo-entrar' src="/assets/5-removebg-preview.png" />
-    </div>
+    </div> */}
     <main>
       <BrowserRouter>
         <App />

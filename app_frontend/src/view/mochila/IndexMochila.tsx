@@ -87,8 +87,8 @@ const IndexMochila = () => {
     
     return (
         <div>
-            <h1 style={{color: 'white', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Mochila de temas</h1>
-            <h5 style={{color: 'white', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Aqui você pode equipar os temas que comprou</h5>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Inventário de temas</h1>
+            <h5 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Equipe os temas comprados no store</h5>
             {!carregouTemas && <div className='d-flex justify-content-center w-100'>
                 <CircularProgress />
             </div>}
@@ -133,7 +133,7 @@ const IndexMochila = () => {
                     <WhitePagination color='standard' variant='outlined' count={qtPaginas} page={pagina} onChange={(ev, pgn) => setPagina(_ => pgn)} />
                 </div>
             </>}
-            {carregouTemas && lTemas.length == 0 && <span style={{color: 'white'}}>Nenhum tema comprado ainda.</span>}
+            {carregouTemas && lTemas.length == 0 && <span style={{color: 'black', fontFamily: 'bungee', display: 'block', textAlign: 'center', marginTop: '30px' }}>Nenhum tema comprado ainda.</span>}
 
             <ErroModal estaAberto={erroEstaAberto} onFechar={() => setErroEstaAberto(_ => false)} problema={problemaErro} />
         </div>

@@ -249,6 +249,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
             ePosicaoValida =
                 (idPosicaoSelecionada == ultimaPosicaoMarcada + 1
                     || idPosicaoSelecionada == ultimaPosicaoMarcada - 1
+                    
                     || idPosicaoSelecionada == ultimaPosicaoMarcada + 10
                     || idPosicaoSelecionada == ultimaPosicaoMarcada - 10)
                 &&
@@ -268,7 +269,10 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
                     || idPosicaoSelecionada == posicoesJaMarcadasParaOBarcoAtual[0] - 1
                     || idPosicaoSelecionada == posicoesJaMarcadasParaOBarcoAtual[0] - 2
                     || idPosicaoSelecionada == posicoesJaMarcadasParaOBarcoAtual[0] - 3
-                    || idPosicaoSelecionada == posicoesJaMarcadasParaOBarcoAtual[0] - 4)
+                    || idPosicaoSelecionada == posicoesJaMarcadasParaOBarcoAtual[0] - 4
+                    
+                    
+                    )
 
             errorMessage = !ePosicaoValida ? "Posição inválida. Selecione uma posição adjacente à última posição selecionada." : errorMessage
         }
@@ -445,11 +449,10 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
     return (
         <div>
             <div className='titulo-wrapper'>
-                <h1>BATTLE OF OCEAN</h1>
+                <h1>HORA DE PREPARAR SEU TABULEIRO</h1>
             </div>
             <div className="container-tabuleiros">
                 {!estaEsperando && <>
-                    <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>É HORA DE PREPARAR A SUA ESTRATÉGIA</Typography>
                     <div style={{ alignContent: 'center', paddingLeft: '5%', display: 'flex', flexDirection: 'row', marginTop: '10px' }}>
                         <div>
                             <Tooltip title={tooltipTamn1 + " - 1 posição"} arrow>
@@ -533,11 +536,11 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
                             </Tooltip>
 
                             <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black", marginTop: '20px' }}>INSTRUÇÕES PARA JOGAR</Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>1° - Selecione um navio dos disponíveis acima </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>2° - Marque as posições que ele deve ocupar no tabuleiro (Deve-se marcar todas) </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>3° - Clique em enviar navio para a posição </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>4° - Caso deseje reposicionar um navio, <br /> basta selecioná-lo no tabuleiro e escolher a nova posição </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>5° - Quando posicionar os dez navios, clique em Salvar Estratégia</Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>1° - Selecione uma peça das disponíveis acima </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>2° - Marque as posições que ela deve ocupar no tabuleiro (Deve-se marcar todas) </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>3° - Clique em enviar a peça para a posição </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>4° - Caso deseje reposicionar uma peça, <br /> basta selecioná-lo no tabuleiro e escolher a nova posição </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>5° - Quando posicionar as dez peças, clique em Salvar Estratégia</Typography>
                         </div>
                         <div style={{ marginLeft: '10px' }}>
                             <PosicaoContainer handlePosicaoOnClick={handlePosicaoOnClick} idPrefix='user' clickable={podeSelecionarPosicoes} />
