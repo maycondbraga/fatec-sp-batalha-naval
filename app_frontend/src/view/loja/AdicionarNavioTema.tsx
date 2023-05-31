@@ -27,7 +27,6 @@ interface AdicionarNavioTemaProps {
 }
 
 const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
-
     // const navigate = useNavigate();
 
     // const userState = new UserState();
@@ -68,17 +67,16 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
 
     const handleClickSalvar = async () => {
 
-
         // Validaçao
         let camposNulos: string[] = [];
         let tamnQuadradosAsNumber = 0;
         try {
             tamnQuadradosAsNumber = parseInt(tamnQuadradosAsString);
             if (LiteralNavio.obterPorTamnQuadradosOrDefault(tamnQuadradosAsNumber) == null) {
-                camposNulos.push('Tamanho Peças');
+                camposNulos.push('Objeto');
             }
         } catch (er) {
-            camposNulos.push('Tamanho Peças');
+            camposNulos.push('Objeto');
         }
         if (nomePersonalizado.length == 0) {
             camposNulos.push('Nome Personalizado');
@@ -91,30 +89,23 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
             setErroEstaAberto(_ => true);
             return;
         }
-
+        
         let novoNavioTema = new MdDetalheNavioTema();
         novoNavioTema.tamnQuadrados = tamnQuadradosAsNumber;
-        novoNavioTema.nomePersonalizado = nomePersonalizado.toLowerCase();
+        novoNavioTema.nomePersonalizado = nomePersonalizado;
         novoNavioTema.numeroRecuperacaoArquivoImagemNavio = numeroRecuperacaoImagem;
         novoNavioTema.bytesParaUploadArquivo = bytesImagem;
-
-        if (sessionStorage.getItem(novoNavioTema.nomePersonalizado) == novoNavioTema.nomePersonalizado){
-            setProblemaErro(_ => 'Os navios não podem ter o mesmo nome.');
-            setErroEstaAberto(_ => true);
-            return;
-        }
-
-        sessionStorage.setItem(novoNavioTema.nomePersonalizado, novoNavioTema.nomePersonalizado);
         props.onSalvar(novoNavioTema);
-        }
+    }
+
     return (
         <>
-            <h1 style={{color: 'black'}}>Adicionar Personalização</h1>
+            <h1>Adicionar Personalização</h1>
             
                 <div className="row g-0">
                     <FormControl>
-                            <InputLabel>Tamanho Peças</InputLabel>
-                        <Select value={tamnQuadradosAsString} label="Tamanho Peças" onChange={ev => setTamnQuadradosAsString(_ => (ev.target.value as string))} >
+                            <InputLabel>Objeto</InputLabel>
+                        <Select value={tamnQuadradosAsString} label="Objeto" onChange={ev => setTamnQuadradosAsString(_ => (ev.target.value as string))} >
                             <MenuItem value="">
                                 <span>Selecione...</span>
                             </MenuItem>
@@ -128,7 +119,7 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
                         </Select>
 
                     </FormControl>
-                    <EncVnTextField label="Tamanho (quantidade)" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} value={tamnQuadradosAsString} disabled />
+                    <EncVnTextField label="Tamanho (qtd.)" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} value={tamnQuadradosAsString} disabled />
                 </div>
                 <div className="row g-0">
                     <EncVnTextField label="Nome Personalizado" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNomePersonalizado(_ => ev.target.value)} value={nomePersonalizado} />
@@ -180,5 +171,6 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
         </>
     )
 }
+
 
 export default AdicionarNavioTema

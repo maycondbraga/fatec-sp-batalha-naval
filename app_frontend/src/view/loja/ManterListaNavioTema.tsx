@@ -49,9 +49,8 @@ const ManterListaNavioTema = (props: ManterListaNavioTemaProps) => {
         }
     }, [idxNavioTemaAlteracaoPendente]);
 
-    const handleClickExcluir = (idxNavioTema: number, tamNavio: number, nomeNavio: string): void => {
+    const handleClickExcluir = (idxNavioTema: number, tamNavio: number): void => {
         props.setLNaviosTema(_ => props.lNaviosTema.filter((el, idxEl) => idxEl != idxNavioTema));
-        sessionStorage.removeItem(nomeNavio);
         // updateNaviosAdicionados(arr => arr.filter((item) => item != tamNavio))
     }
 
@@ -83,9 +82,9 @@ const ManterListaNavioTema = (props: ManterListaNavioTemaProps) => {
                     <Table sx={{ minWidth: 650 }} size="small" aria-label="Lista de personalizações">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Tamanho Peças</TableCell>
+                                <TableCell>Objeto</TableCell>
                                 <TableCell align="right">Nome</TableCell>
-                                <TableCell align="right">Tamanho (quantidade)</TableCell>
+                                <TableCell align="right">Tamanho (qtd.)</TableCell>
                                 <TableCell align="right">Imagem</TableCell>
                                 <TableCell align="right"></TableCell>
                                 <TableCell align="right"></TableCell>
@@ -120,7 +119,7 @@ const ManterListaNavioTema = (props: ManterListaNavioTemaProps) => {
                                     </Button>}
                                 </TableCell>
                                 <TableCell align="right">
-                                    {!props.eListaBloqueada && <Button onClick={() => handleClickExcluir(idxNavioTema, elNavioTema.tamnQuadrados, elNavioTema.nomePersonalizado)}>
+                                    {!props.eListaBloqueada && <Button onClick={() => handleClickExcluir(idxNavioTema, elNavioTema.tamnQuadrados)}>
                                         <DeleteOutlinedIcon color="error" className="me-3" />
                                     </Button>}
                                 </TableCell>
