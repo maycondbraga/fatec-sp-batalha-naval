@@ -41,7 +41,7 @@ export default function FinalJogo() {
 
         <Container sx={{ py: 4 }} maxWidth="md">
           <div className='d-flex justify-content-center'>
-            {(ganhou != undefined && ganhou == 'S') ? <img src='/assets/bone_de_marinheiro.svg' style={{ height: '40vh' }} /> : <img src='/assets/salva_vidas.svg' style={{ height: '40vh' }} />}
+            {(ganhou != undefined && ganhou == 'S') ? <img src='/assets/dracula.jpeg' style={{ height: '40vh' }} /> : <img src='/assets/titanic-breaks.gif' style={{ height: '40vh' }} />}
           </div>
           <div className='d-flex justify-content-center mt-4'>
             <Button size="medium" onClick={() => navigate('/salas')} variant="contained">Voltar para as salas</Button>
