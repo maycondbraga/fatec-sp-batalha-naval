@@ -63,7 +63,7 @@ const AdicionarTema = () => {
 
     const handleClickSalvar = async () => {
         if (!validarNavios(lNaviosTema)){
-            setProblemaErro(_ => 'Verifique se todos os navios foram adicionados ou não contém duplicatas');
+            setProblemaErro(_ => 'Verifique se todos os objetos foram adicionados ou não contém duplicatas');
             setErroEstaAberto(_ => true);
             return;
         }
@@ -78,7 +78,7 @@ const AdicionarTema = () => {
             novoNavioTemaParaPush.nomePersonalizado = iDetalheTema.nomePersonalizado;
             novoNavioTemaParaPush.numeroRecuperacaoArquivoImagemNavio = iDetalheTema.numeroRecuperacaoArquivoImagemNavio ?? '';
             if (iDetalheTema.bytesParaUploadArquivo == null) {
-                setProblemaErro(_ => 'Falha ao carregar imagem de um dos navios.');
+                setProblemaErro(_ => 'Falha ao carregar imagem de um dos objetos.');
                 setErroEstaAberto(_ => true);
                 return;
             }

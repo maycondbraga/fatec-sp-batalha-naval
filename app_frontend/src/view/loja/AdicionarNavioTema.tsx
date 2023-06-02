@@ -75,10 +75,10 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
         try {
             tamnQuadradosAsNumber = parseInt(tamnQuadradosAsString);
             if (LiteralNavio.obterPorTamnQuadradosOrDefault(tamnQuadradosAsNumber) == null) {
-                camposNulos.push('Tamanho Peças');
+                camposNulos.push('Tamanho Objetos');
             }
         } catch (er) {
-            camposNulos.push('Tamanho Peças');
+            camposNulos.push('Tamanho Objetos');
         }
         if (nomePersonalizado.length == 0) {
             camposNulos.push('Nome Personalizado');
@@ -99,7 +99,7 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
         novoNavioTema.bytesParaUploadArquivo = bytesImagem;
 
         if (sessionStorage.getItem(novoNavioTema.nomePersonalizado) == novoNavioTema.nomePersonalizado){
-            setProblemaErro(_ => 'Os navios não podem ter o mesmo nome.');
+            setProblemaErro(_ => 'Os objetos não podem ter o mesmo nome.');
             setErroEstaAberto(_ => true);
             return;
         }
@@ -113,8 +113,8 @@ const AdicionarNavioTema = (props: AdicionarNavioTemaProps) => {
             
                 <div className="row g-0">
                     <FormControl>
-                            <InputLabel>Tamanho Peças</InputLabel>
-                        <Select value={tamnQuadradosAsString} label="Tamanho Peças" onChange={ev => setTamnQuadradosAsString(_ => (ev.target.value as string))} >
+                            <InputLabel>Tamanho Objetos</InputLabel>
+                        <Select value={tamnQuadradosAsString} label="Tamanho Objetos" onChange={ev => setTamnQuadradosAsString(_ => (ev.target.value as string))} >
                             <MenuItem value="">
                                 <span>Selecione...</span>
                             </MenuItem>
