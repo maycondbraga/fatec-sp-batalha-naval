@@ -91,10 +91,10 @@ const AlterarNavioTema = (props: AlterarNavioTemaProps) => {
         try {
             tamnQuadradosAsNumber = parseInt(tamnQuadradosAsString);
             if (LiteralNavio.obterPorTamnQuadradosOrDefault(tamnQuadradosAsNumber) == null) {
-                camposNulos.push('Tamanho Peças');
+                camposNulos.push('Tamanho Objetos');
             }
         } catch (er) {
-            camposNulos.push('Tamanho Peças');
+            camposNulos.push('Tamanho Objetos');
         }
         if (nomePersonalizado.length == 0) {
             camposNulos.push('Nome Personalizado');
@@ -127,8 +127,8 @@ const AlterarNavioTema = (props: AlterarNavioTemaProps) => {
             
                 <div className="row g-0">
                     <FormControl>
-                            <InputLabel>Tamanho Peças</InputLabel>
-                        <Select value={tamnQuadradosAsString} label="Tamanho Peças" onChange={ev => setTamnQuadradosAsString(_ => (ev.target.value as string))} >
+                            <InputLabel>Tamanho Objetos</InputLabel>
+                        <Select value={tamnQuadradosAsString} label="Tamanho Objetos" onChange={ev => setTamnQuadradosAsString(_ => (ev.target.value as string))} >
                             <MenuItem value="">
                                 <span>Selecione...</span>
                             </MenuItem>

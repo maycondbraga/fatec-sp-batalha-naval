@@ -176,7 +176,7 @@ export default function ListagemSalas(props: ListagemSalasProps) {
                     {/* <Typography sx={{ color: 'red', fontFamily: 'Bungee' }}>Player 2</Typography> */}
                   </CardContent>
                   <CardActions>
-                    <Button size="small" variant="contained" sx={{ mx: 'auto' }} onClick={() => handleClickEntrar(sala.numeroRecuperacaoUrl)}>CONECTAR</Button>
+                    <Button size="small" variant="contained" sx={{ mx: 'auto' }} onClick={() => handleClickEntrar(sala.numeroRecuperacaoUrl)}>ENTRAR</Button>
                   </CardActions>
 
                 </Card>

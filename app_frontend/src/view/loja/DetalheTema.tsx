@@ -90,7 +90,7 @@ const DetalheTema = () => {
     const handleClickSalvar = async () => {
         const tryIdTema = searchParams.get('id');
         if (!validarNavios(lNaviosTema)){
-            setProblemaErro(_ => 'Faltam navios a serem adicionados');
+            setProblemaErro(_ => 'Faltam objetos a serem adicionados');
             setErroEstaAberto(_ => true);
             return;
         }
