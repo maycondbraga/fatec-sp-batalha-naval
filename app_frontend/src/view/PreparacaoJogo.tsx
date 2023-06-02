@@ -29,7 +29,7 @@ type PosicoesOcupadas = {
 const PreparacaoJogo = (props: PreparacaoJogoProps) => {
 
     const navigate = useNavigate();
-    const audioBarcoChegando = new Audio('/assets/som_barco_chegando.mp3')
+    const audioBarcoChegando = new Audio('/assets/mario-entrando-no-cano.mp3')
 
     const barcoPequenoRef1 = useRef<any>()
     const barcoPequenoRef2 = useRef<any>()
@@ -242,7 +242,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
 
         if (totalPosicoesOcupadas.map(x => x.posicoes).flat().includes(idPosicaoSelecionada)) {
             ePosicaoValida = false
-            errorMessage = "Posição já ocupada por outra embarcação."
+            errorMessage = "Posição já ocupada."
         } else if (posicoesJaMarcadasParaOBarcoAtual.length > 0) {
             const ultimaPosicaoMarcada = posicoesJaMarcadasParaOBarcoAtual[posicoesJaMarcadasParaOBarcoAtual.length - 1]
 
@@ -284,7 +284,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
 
         if (posicoesJaMarcadasParaOBarcoAtual.length >= tamanhoBarcoAtual) {
             ePosicaoValida = false
-            errorMessage = "Você já selecionou o número máximo de casas para essa embarcação ocupar."
+            errorMessage = "Você já selecionou o número máximo de casas para esse objeto."
         }
 
         if (ePosicaoValida) {
@@ -320,7 +320,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
     const handleEnviarNavioOnClick = () => {
         if (posicoesJaMarcadasParaOBarcoAtual.length < tamanhoBarcoAtual) {
             setErroEstaAberto(_ => true);
-            setProblemaErro(_ => "Você ainda não selecionou todas as posições necessárias para comandar o envio desse navio para a posição.");
+            setProblemaErro(_ => "Você ainda não selecionou todas as posições necessárias.");
             return;
         }
 
@@ -398,7 +398,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
         // Validar se enviou todos os navios
         if (lNaviosParaEnviar.length < QUANTIDADE_ESTRATEGIAS_PARA_SALVAR) {
             setErroEstaAberto(_ => true);
-            setProblemaErro(_ => "Você ainda não enviou todos os navios em suas posições.");
+            setProblemaErro(_ => "Você ainda não enviou todos os objetos para suas posições.");
             return;
         }
 
@@ -536,11 +536,11 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
                             </Tooltip>
 
                             <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black", marginTop: '20px' }}>INSTRUÇÕES PARA JOGAR</Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>1° - Selecione uma peça das disponíveis acima </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>2° - Marque as posições que ela deve ocupar no tabuleiro (Deve-se marcar todas) </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>3° - Clique em enviar a peça para a posição </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>4° - Caso deseje reposicionar uma peça, <br /> basta selecioná-lo no tabuleiro e escolher a nova posição </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>5° - Quando posicionar as dez peças, clique em Salvar Estratégia</Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>1° - Selecione um objeto dos disponíveis acima </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>2° - Marque as posições que ele deve ocupar no tabuleiro (Deve-se marcar todas) </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>3° - Clique em Enviar objeto para a posição </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>4° - Caso deseje reposicionar um objeto, <br /> basta selecioná-lo no tabuleiro e escolher a nova posição </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>5° - Quando posicionar as dez objetos, clique em Salvar Estratégia</Typography>
                         </div>
                         <div style={{ marginLeft: '10px' }}>
                             <PosicaoContainer handlePosicaoOnClick={handlePosicaoOnClick} idPrefix='user' clickable={podeSelecionarPosicoes} />
@@ -548,8 +548,8 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
                     </div>
 
                     <Card sx={{ textAlign: 'center', marginTop: '20px' }}>
-                        <Button disabled={!podeSelecionarPosicoes} onClick={handleEnviarNavioOnClick} sx={{ marginRight: '32px' }}> Enviar navio para a posição </Button>
-                        <Button disabled={!podeEnviarEstrategia} onClick={handleSalvarEstrategiaOnClick} variant="contained"> Salvar Estrategia </Button>
+                        <Button disabled={!podeSelecionarPosicoes} onClick={handleEnviarNavioOnClick} sx={{ marginRight: '32px' }}> Enviar objeto para a posição </Button>
+                        <Button disabled={!podeEnviarEstrategia} onClick={handleSalvarEstrategiaOnClick} variant="contained"> Salvar Estratégia </Button>
                     </Card>
                 </>}
                 {estaEsperando && <Card sx={{ border: 1, borderColor: '#9D9D9D', height: '100%' }}>
