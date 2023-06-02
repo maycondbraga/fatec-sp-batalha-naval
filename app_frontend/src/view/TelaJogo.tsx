@@ -19,7 +19,7 @@ import ImgNavioHorizontal from '../components/imagem/ImgNavioHorizontal';
 import { PostTiroFluxo } from "../modelos/importarBack/PostTiroFluxo";
 import { MdDetalheTema } from "../modelos/importarBack/MdDetalheTema";
 
-const SEGUNDOS_TIMER = 15;
+const SEGUNDOS_TIMER = 30;
 
 const CircularProgressWithLabel = (
     props: CircularProgressProps & { value: number },
