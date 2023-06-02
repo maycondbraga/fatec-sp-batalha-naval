@@ -167,15 +167,27 @@ const Header = (props: HeaderProps) => {
                                 </Button>
                             ))}
                         </Box>               
+                        <Typography
+                            variant="subtitle2"
+                            noWrap
+                            sx={{
+                                mr: 2,
+                                fontFamily: 'Righteous',
+                                fontWeight: 700,
+                                letterSpacing: '.1rem',
+                                color: 'white',
+                                textDecoration: 'none',
+                            }}
+                            >
+                            {loggedIn ? ( props.username.split(' ')[0]) : 'Entrar'}
+                        </Typography>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Button
-                            key={loggedIn ? ( props.username.split(' ')[0]) : 'Entrar'}
-                            onClick={handleOpenUserMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' , fontFamily: "Righteous"}}
-                        >
-                            {loggedIn ? ( 'Bem Vindo, ' + props.username.split(' ')[0]) : 'Entrar'}
-                        </Button>
+                        <Tooltip title="Open settings"> 
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <Avatar alt="Profile pic" src="/assets/Avatar2.png" />
+                            </IconButton>
+                        </Tooltip>
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"
