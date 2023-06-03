@@ -65,6 +65,7 @@ mongoose.connect(configBack.conexaoMongodb, { dbName: 'EncVn' })
     //   res.send(`Sal do Hash: ${_configuracaoBackend.getSalDoHash()}`);
     // });
     app.use(cors());
+    app.use(express.static(__dirname));
     app.use(express.json());
     
     app.use('/api/autorizacao', autorizacaoController.router);

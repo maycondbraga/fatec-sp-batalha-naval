@@ -55,6 +55,7 @@ function App() {
           <Route path="/game/end/:ganhou" element={<ProtectedRoute><FinalJogo/></ProtectedRoute>} />,
           <Route path="/perfil" element={<ProtectedRoute><Perfil setUsername={setUsername} /></ProtectedRoute>} />,
           <Route path="/salas" element={<ProtectedRoute>{salasElement}</ProtectedRoute>} />,
+          <Route path="*" element={<Entrar />} />
         </Routes>
       </div>
     </>
