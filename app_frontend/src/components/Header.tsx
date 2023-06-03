@@ -60,9 +60,9 @@ const Header = (props: HeaderProps) => {
     const definePages = () => {
         if (loggedIn) {
             if (userState.localStorageUser?.eSuperuser)
-                return [{label: 'Store', href: 'loja'}, {label: 'Inventário', href: 'mochila'}, {label: 'Admin Store', href: 'liberacao'}];
+                return [{label: 'Loja', href: 'loja'}, {label: 'Inventário', href: 'mochila'}, {label: 'Admin Store', href: 'liberacao'}];
             else
-                return [{label: 'Store', href: 'loja'}, {label: 'Inventário', href: 'mochila'}];
+                return [{label: 'Loja', href: 'loja'}, {label: 'Inventário', href: 'mochila'}];
         }
         return [];
     }

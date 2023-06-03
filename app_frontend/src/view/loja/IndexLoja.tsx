@@ -104,7 +104,7 @@ const IndexLoja = () => {
     
     return (
         <div>
-            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Store</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Loja</h1>
             {!carregouTemas && <div className='d-flex justify-content-center w-100'>
                 <CircularProgress />
             </div>}
@@ -168,8 +168,11 @@ const IndexLoja = () => {
             <SucessoModal estaAberto={sucessoExclusaoEstaAberto} onFechar={() => window.location.reload()} mensagem='Tema excluído com sucesso!' />
             <SucessoModal estaAberto={sucessoCompraEstaAberto} onFechar={() => window.location.reload()} mensagem='Tema comprado com sucesso!' />
             <ErroModal estaAberto={erroEstaAberto} onFechar={() => setErroEstaAberto(_ => false)} problema={problemaErro} />
+            <div className='payment_button'>
+                <a href="https://pag.ae/7ZrH2dwNL/button" rel="noopener" target="_blank" title="Pagar com PagSeguro"><img src="//assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/95x45-pagar-azul.gif" alt="Pague com PagSeguro - é rápido, grátis e seguro!" /></a>
+                </div>
         </div>
-    )
+    ) 
 }
 
 
