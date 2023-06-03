@@ -89,6 +89,14 @@ const IndexMochila = () => {
         <div>
             <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Inventário de temas</h1>
             <h5 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Equipe os temas comprados na Loja</h5>
+            
+            <h6 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '10px' }}>
+                Sem créditos? Faça sua compra aqui com PagSeguro!&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="https://pag.ae/7ZrH2dwNL/button" rel="noopener" target="_blank" title="Pagar com PagSeguro">
+                    <img src="//assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/95x45-pagar-azul.gif" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+                </a>
+            </h6>
+
             {!carregouTemas && <div className='d-flex justify-content-center w-100'>
                 <CircularProgress />
             </div>}
@@ -134,11 +142,8 @@ const IndexMochila = () => {
                 </div>
             </>}
             {carregouTemas && lTemas.length == 0 && <span style={{color: 'black', fontFamily: 'bungee', display: 'block', textAlign: 'center', marginTop: '30px' }}>Nenhum tema comprado ainda.</span>}
-
+            
             <ErroModal estaAberto={erroEstaAberto} onFechar={() => setErroEstaAberto(_ => false)} problema={problemaErro} />
-            <div className='payment_button'>
-                <a href="https://pag.ae/7ZrH2dwNL/button" rel="noopener" target="_blank" title="Pagar com PagSeguro"><img src="//assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/95x45-pagar-azul.gif" alt="Pague com PagSeguro - é rápido, grátis e seguro!" /></a>
-                </div>
         </div>
         
     )
