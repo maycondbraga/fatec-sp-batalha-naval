@@ -84,8 +84,6 @@ const Header = (props: HeaderProps) => {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href= {loggedIn ? "/salas" : "/auth/entrar"}
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -95,7 +93,7 @@ const Header = (props: HeaderProps) => {
                             textDecoration: 'none',
                         }}
                     >
-                        Jogar
+                        <Link style={{ textDecoration: "none", color: "white", fontFamily: "Righteous"}} to={loggedIn ? "/salas" : "/auth/entrar"}>Jogar</Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -141,8 +139,6 @@ const Header = (props: HeaderProps) => {
                     <Typography
                         variant="h5"
                         noWrap
-                        component="a"
-                        href= {loggedIn ? "" : "/auth/entrar"}
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -154,7 +150,7 @@ const Header = (props: HeaderProps) => {
                             textDecoration: 'none',
                         }}
                     >
-                        Jogar
+                        <Link style={{ textDecoration: "none", color: "white", fontFamily: "Righteous"}} to={loggedIn ? "" : "/auth/entrar"}>Jogar</Link>
                     </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>                        
                             {pages.map((page) => (
