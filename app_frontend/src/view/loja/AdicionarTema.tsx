@@ -83,6 +83,12 @@ const AdicionarTema = () => {
             setErroEstaAberto(_ => true);
             return;
         }
+        if (bytesTemaImagem == null || bytesTemaImagem.size <= 0){
+            setProblemaErro(_ => 'É necessário ter um tema de fundo de tela selecionado.');
+            setErroEstaAberto(_ => true);
+            return;
+        }
+
         let novoTema = new PostNovoTema();
         novoTema.nome = nome;
         novoTema.preco = preco;
@@ -147,6 +153,7 @@ const AdicionarTema = () => {
                                     name="btn-upload-tema"
                                     style={{ display: 'none' }}
                                     type="file"
+                                    accept="image/png, image/jpeg"
                                     onChange={handleTemaArquivoSelecionado} />
                                     <Button
                                     className="btn-choose"

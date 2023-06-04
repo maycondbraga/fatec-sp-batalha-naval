@@ -151,10 +151,6 @@ class TemaController extends ControllerBase {
             throw ex;
         }
 
-        if (novoTema.fundoTela != null){
-            console.log('tamanho Tema fundo de tela: ' + novoTema.fundoTela.size);
-        }
-
         let insertTema = new DbTema();
         insertTema.id = StringUteis.gerarNovoIdDe24Caracteres();
         insertTema.nome = novoTema.nome;
