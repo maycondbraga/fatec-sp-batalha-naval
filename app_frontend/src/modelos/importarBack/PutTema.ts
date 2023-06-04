@@ -5,5 +5,6 @@ export class PutTema {
     nome: string = '';
     preco: number | null = null;
     descricao: string = '';
+    fundoTela: Blob | null = null;
     naviosTema: PutNavioTema[] = [];
 }

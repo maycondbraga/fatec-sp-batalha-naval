@@ -34,6 +34,7 @@ const DetalheTema = () => {
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState<number | null>(null);
     const [descricao, setDescricao] = useState('');
+    const [bytesTemaImagem, setBytesTemaImagem] = useState<Blob | null>(null);
     // const [idxTab, setIdxTab] = useState(0);
     const [popupNaviosTemaEstaAberto, setPopupNaviosTemaEstaAberto] = useState(false);
     const [lNaviosTema, setLNaviosTema] = useState<MdDetalheNavioTema[]>([]);
@@ -56,6 +57,7 @@ const DetalheTema = () => {
                         setNome(_ => detalheTema.nome);
                         setPreco(_ => detalheTema.preco);
                         setDescricao(_ => detalheTema.descricao);
+                        setBytesTemaImagem(_ => detalheTema.fundoTela)
                         setLNaviosTema(_ => detalheTema.naviosTema);
                     } else {
                         setProblemaErro(rDetalhe.problema);
@@ -64,6 +66,10 @@ const DetalheTema = () => {
                 });
         }
     }, []);
+
+    const handleTemaArquivoSelecionado = (event: any) => {
+        setBytesTemaImagem(_ => event.target.files[0]);
+    }
 
     const formatarPreco = (precoRaw: number | null): string => {
         if (precoRaw == null) {
@@ -104,6 +110,7 @@ const DetalheTema = () => {
         temaAlterado.nome = nome;
         temaAlterado.preco = preco;
         temaAlterado.descricao = descricao;
+        temaAlterado.fundoTela = bytesTemaImagem;
         let promisesParaResolver: Promise<MdRespostaApi<undefined>>[] = [];
         for (let iDetalheTema of lNaviosTema) {
             let navioTemaParaPush = new PutNavioTema();
@@ -164,6 +171,26 @@ const DetalheTema = () => {
                     </div>
                     <div className="row g-0">
                         <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} disabled={!eAlteracao} />
+                    </div>
+                    <div className="row g-0">
+                        {/* Botao de upload */}
+                        <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
+                            <span>Tema de fundo de tela:</span>
+                            <label htmlFor="btn-upload" className="ms-3">
+                                <input
+                                id="btn-upload"
+                                name="btn-upload"
+                                style={{ display: 'none' }}
+                                type="file"
+                                onChange={handleTemaArquivoSelecionado} />
+                                <Button
+                                className="btn-choose"
+                                variant="outlined"
+                                component="span" >
+                                    Escolher Arquivo
+                                </Button>
+                            </label>
+                        </div>
                     </div>
                 {/* </>} */}
                 {/* {idxTab == 1 && <ManterListaNavioTema lNaviosTema={lNaviosTema} setLNaviosTema={setLNaviosTema} />} */}
