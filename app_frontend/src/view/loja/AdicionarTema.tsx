@@ -93,7 +93,13 @@ const AdicionarTema = () => {
         novoTema.nome = nome;
         novoTema.preco = preco;
         novoTema.descricao = descricao;
-        novoTema.fundoTela = bytesTemaImagem;
+
+        var reader = new FileReader();
+        reader.readAsDataURL(bytesTemaImagem); 
+        reader.onloadend = function() {
+            novoTema.fundoTela = reader.result?.toString();
+        }
+        
         let promisesParaResolver: Promise<MdRespostaApi<undefined>>[] = [];
         for (let iDetalheTema of lNaviosTema) {
             let novoNavioTemaParaPush = new PostNovoNavioTema();

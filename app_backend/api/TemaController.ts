@@ -135,7 +135,7 @@ class TemaController extends ControllerBase {
         if (novoTema.descricao.length == 0) {
             camposNulos.push('Descrição');
         }
-        if (novoTema.fundoTela == null || novoTema.fundoTela.size <= 0){
+        if (novoTema.fundoTela == null || novoTema.fundoTela == ''){
             camposNulos.push('Tema fundo de tela');
         }
         if (camposNulos.length > 0) {
@@ -150,6 +150,9 @@ class TemaController extends ControllerBase {
             ex.problema = 'É obrigatório preencher pelo menos uma personalização para adicionar um tema.';
             throw ex;
         }
+
+        // TODO: COLOCAR O BASE64 na base de dados também
+        // TODO: AJUSTAR O FLUXO DE ALTERAR/VER tema
 
         let insertTema = new DbTema();
         insertTema.id = StringUteis.gerarNovoIdDe24Caracteres();
