@@ -1,3 +1,16 @@
+.container-anuncio {
+    margin: auto;
+    padding: auto;
+    margin-top: 50px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 120px;
+    background: gray;
+}
+
 .container-tabuleiros {
     background-color: white;
     width: 60vw;

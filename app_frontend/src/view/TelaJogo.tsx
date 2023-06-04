@@ -513,8 +513,13 @@ const TelaJogo = (props: TelaJogoProps) => {
                         </div>
                     </div>
                 </div>
-                <Typography textAlign="center" style={{ fontFamily: "bungee", color: "gray" }}>{!estaEsperandoInimigoAtirar ? 'SUA VEZ' : 'AGUARDE O ADVERSÁRIO JOGAR'}</Typography>
+                <Typography textAlign="center" style={{ fontFamily: "bungee", color: "gray", marginTop: '30px' }}>{!estaEsperandoInimigoAtirar ? 'SUA VEZ' : 'AGUARDE O ADVERSÁRIO JOGAR'}</Typography>
             </div>
+            
+            <div className="container-anuncio">
+                <Typography style={{ fontFamily: "bungee", color: "white"}}>ANUNCIANTE PAGO</Typography>
+            </div>
+            <br />
             <ErroModal estaAberto={erroEstaAberto} onFechar={() => setErroEstaAberto(_ => false)} problema={problemaErro} />
             <ErroModal estaAberto={erroOponenteSaiuEstaAberto} onFechar={() => handleFecharErroOponenteSaiuOnClick()} problema='O seu oponente se desconectou!' />
         </div>
