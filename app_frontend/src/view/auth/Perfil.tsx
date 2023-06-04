@@ -92,7 +92,7 @@ const Perfil = (props: PerfilProps) => {
 
     return (
         <>
-            <h1 style={{color: 'white', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Perfil</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Perfil</h1>
 
             <Box className='box'>
                     <div className="row g-0">

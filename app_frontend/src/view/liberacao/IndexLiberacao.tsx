@@ -58,7 +58,7 @@ const IndexLiberacao = () => {
     return (
         <div>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
-            <h1 style={{color: 'white', fontFamily: 'Righteous', textAlign: 'center', marginTop: '16px' }}>Usuários</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Usuários</h1>
             {!carregouUsuarios && <div className='d-flex justify-content-center w-100'>
                 <CircularProgress />
             </div>}

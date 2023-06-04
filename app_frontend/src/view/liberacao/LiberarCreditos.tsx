@@ -97,7 +97,7 @@ const LiberarCreditos = () => {
 
     return (
         <>
-            <h1 style={{color: 'white', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Liberar Créditos</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Liberar Créditos</h1>
 
             {!carregouUsuario && <div className='d-flex justify-content-center w-100'>
                 <CircularProgress />

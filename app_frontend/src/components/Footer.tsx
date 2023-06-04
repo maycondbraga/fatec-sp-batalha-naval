@@ -14,7 +14,7 @@ const Footer = () => {
     <ThemeProvider theme={theme}>
       <AppBar position="relative" style={{top: '-10%'}}>
         <Container maxWidth="xl">
-          <Typography textAlign="center" style={{ fontFamily: "bungee", color: "white" }}>© 2023 - Battle Of Ocean</Typography>
+          <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>© 2023 - Battle Of Ocean</Typography>
         </Container>
       </AppBar>
     </ ThemeProvider >

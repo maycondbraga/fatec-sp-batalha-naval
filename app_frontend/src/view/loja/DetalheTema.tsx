@@ -152,7 +152,7 @@ const DetalheTema = () => {
 
     return (
         <>
-            <h1 style={{color: 'white', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>{eAlteracao ? 'Alterar Tema' : 'Detalhes do Tema'}</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>{eAlteracao ? 'Alterar Tema' : 'Detalhes do Tema'}</h1>
 
             <Box className='box'>
                 {/* <Tabs value={idxTab} onChange={(ev, nextIdxTab) => setIdxTab(_ => nextIdxTab)} aria-label="basic tabs example">
