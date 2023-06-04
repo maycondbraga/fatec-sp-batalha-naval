@@ -141,13 +141,13 @@ const AdicionarTema = () => {
                             {/* Botao de upload */}
                             <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
                                 <span>Tema de fundo de tela:</span>
-                                <label htmlFor="btn-upload" className="ms-3">
-                                    {/* <input
-                                    id="btn-upload"
-                                    name="btn-upload"
+                                <label htmlFor="btn-upload-tema" className="ms-3">
+                                    <input
+                                    id="btn-upload-tema"
+                                    name="btn-upload-tema"
                                     style={{ display: 'none' }}
                                     type="file"
-                                    onChange={handleTemaArquivoSelecionado} /> */}
+                                    onChange={handleTemaArquivoSelecionado} />
                                     <Button
                                     className="btn-choose"
                                     variant="outlined"
