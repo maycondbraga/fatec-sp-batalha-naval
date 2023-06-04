@@ -1,5 +1,5 @@
 import { Box, Button, InputAdornment, styled, Tab, Tabs, TextField, Dialog, DialogContent, DialogActions } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErroModal from '../../components/erroModal/ErroModal';
 import SucessoModal from '../../components/sucessoModal/SucessoModal';
@@ -39,6 +39,17 @@ const AdicionarTema = () => {
     const [problemaErro, setProblemaErro] = useState('');
 
     const [sucessoAdicaoEstaAberto, setSucessoAdicaoEstaAberto] = useState(false);
+
+    const calcularSrcTemaImagemPrevia = (): string => {
+        if (bytesTemaImagem != null)
+            return URL.createObjectURL(bytesTemaImagem);
+        return '';
+    }
+    const [srcTemaImagemPrevia, setSrcTemaImagemPrevia] = useState(calcularSrcTemaImagemPrevia());
+    
+    useEffect(() => 
+        setSrcTemaImagemPrevia(_ => calcularSrcTemaImagemPrevia()),
+    [bytesTemaImagem]);
 
     const handleTemaArquivoSelecionado = (event: any) => {
         setBytesTemaImagem(_ => event.target.files[0]);
@@ -116,36 +127,43 @@ const AdicionarTema = () => {
                     <Tab label="Navios" />
                 </Tabs> */}
                 {/* {idxTab == 0 && <> */}
-                    <div className="row g-0">
-                        <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNome(_ => ev.target.value)} value={nome} />
-                    </div>
-                    <div className="row g-0">
-                        <EncVnTextField label="Preço" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setPreco(_ => UtilNumber.parseFloatOrDefault(ev.target.value))} 
-                        value={precoAsFormatado} InputProps={{
-                            startAdornment: <InputAdornment position="start">R$</InputAdornment>,
-                        }} />
-                    </div>
-                    <div className="row g-0">
-                        <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} />
-                    </div>
                     <div className="row g-0" >
-                        {/* Botao de upload */}
-                        <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
-                            <span>Tema de fundo de tela:</span>
-                            <label htmlFor="btn-upload" className="ms-3">
-                                <input
-                                id="btn-upload"
-                                name="btn-upload"
-                                style={{ display: 'none' }}
-                                type="file"
-                                onChange={handleTemaArquivoSelecionado} />
-                                <Button
-                                className="btn-choose"
-                                variant="outlined"
-                                component="span" >
-                                    Escolher Arquivo
-                                </Button>
-                            </label>
+                        <div className="col-6">
+                            <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNome(_ => ev.target.value)} value={nome} />
+
+                            <EncVnTextField label="Preço" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setPreco(_ => UtilNumber.parseFloatOrDefault(ev.target.value))} 
+                            value={precoAsFormatado} InputProps={{
+                                startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                            }} />
+
+                            <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} />
+                            
+                            {/* Botao de upload */}
+                            <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
+                                <span>Tema de fundo de tela:</span>
+                                <label htmlFor="btn-upload" className="ms-3">
+                                    {/* <input
+                                    id="btn-upload"
+                                    name="btn-upload"
+                                    style={{ display: 'none' }}
+                                    type="file"
+                                    onChange={handleTemaArquivoSelecionado} /> */}
+                                    <Button
+                                    className="btn-choose"
+                                    variant="outlined"
+                                    component="span" >
+                                        Escolher Arquivo
+                                    </Button>
+                                </label>
+                            </div>
+                        </div>
+                        <div className="col-6">
+                            <div className="row g-0 mt-3">
+                                {bytesTemaImagem != null ? (bytesTemaImagem as File).name : null}
+                            </div>
+                            <div className="row g-0 mt-3">
+                                {bytesTemaImagem == null ? null : <img src={srcTemaImagemPrevia} style={{ maxHeight: '100%', maxWidth: '100%' }} />}
+                            </div>
                         </div>
                     </div>
                 {/* </>} */}
