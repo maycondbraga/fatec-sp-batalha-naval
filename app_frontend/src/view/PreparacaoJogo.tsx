@@ -450,7 +450,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
     //TODO: Tratar para organizar os elementos corretamente em tela
     return (
         <div style={{ backgroundImage: 'url("' + fundoTemaSrc + '")',  backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
-            <div className='titulo-wrapper'>
+            <div className='titulo-wrapper borda_texto'>
                 <h1>HORA DE PREPARAR SEU TABULEIRO</h1>
             </div>
             <div className="container-tabuleiros">
