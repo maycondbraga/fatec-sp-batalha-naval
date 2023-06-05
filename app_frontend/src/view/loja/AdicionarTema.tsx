@@ -171,11 +171,9 @@ const AdicionarTema = () => {
                             </div>
                         </div>
                         <div className="col-6">
-                            <div className="row g-0 mt-3">
-                                {bytesTemaImagem != null ? (bytesTemaImagem as File).name : null}
-                            </div>
-                            <div className="row g-0 mt-3">
-                                {bytesTemaImagem == null ? null : <img src={srcTemaImagemPrevia} style={{ maxHeight: '100%', maxWidth: '100%' }} />}
+                        <div className="row g-0 mt-3">
+                                {bytesTemaImagem == null ? null : <h6 style={{color: 'black', fontFamily: 'bungee', marginTop: '5px' }}>Fundo de tela:</h6>}
+                                {bytesTemaImagem == null ? null : <img src={srcTemaImagemPrevia} style={{ maxHeight: '100%', maxWidth: '100%', marginTop: '10px' }} />}
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,6 @@ export class MdDetalheTema {
     nome: string = '';
     preco: number = 0;
     descricao: string = '';
-    fundoTela: Blob | null = null;
+    fundoTela: string = '';
     naviosTema: MdDetalheNavioTema[] = [];
 }

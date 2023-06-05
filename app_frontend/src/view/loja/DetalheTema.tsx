@@ -43,6 +43,15 @@ const DetalheTema = () => {
     const [problemaErro, setProblemaErro] = useState('');
     const [sucessoAlteracaoEstaAberto, setSucessoAlteracaoEstaAberto] = useState(false);
 
+    const calcularSrcTemaImagemPrevia = (): string => {
+        if (bytesTemaImagem != null)
+            return URL.createObjectURL(bytesTemaImagem);
+        return '';
+    }
+    
+    const [srcTemaImagemPrevia, setSrcTemaImagemPrevia] = useState(calcularSrcTemaImagemPrevia());
+    useEffect(() => setSrcTemaImagemPrevia(calcularSrcTemaImagemPrevia()), [bytesTemaImagem]);
+
     let eAlteracao = searchParams.get('eAlteracao') == 'S';
     useEffect(() => {
         const tryIdTema = searchParams.get('id');
@@ -57,7 +66,11 @@ const DetalheTema = () => {
                         setNome(_ => detalheTema.nome);
                         setPreco(_ => detalheTema.preco);
                         setDescricao(_ => detalheTema.descricao);
-                        setBytesTemaImagem(_ => detalheTema.fundoTela)
+
+                        fetch(detalheTema.fundoTela)
+                        .then(res => res.blob())
+                        .then(blob => setBytesTemaImagem(_ => blob));
+
                         setLNaviosTema(_ => detalheTema.naviosTema);
                     } else {
                         setProblemaErro(rDetalhe.problema);
@@ -100,6 +113,11 @@ const DetalheTema = () => {
             setErroEstaAberto(_ => true);
             return;
         }
+        if (bytesTemaImagem == null || bytesTemaImagem.size <= 0){
+            setProblemaErro(_ => 'É necessário ter um tema de fundo de tela selecionado.');
+            setErroEstaAberto(_ => true);
+            return;
+        }
         if (tryIdTema == null) {
             setProblemaErro(_ => 'Tema não encontrado');
             setErroEstaAberto(_ => true);
@@ -110,7 +128,13 @@ const DetalheTema = () => {
         temaAlterado.nome = nome;
         temaAlterado.preco = preco;
         temaAlterado.descricao = descricao;
-        temaAlterado.fundoTela = bytesTemaImagem;
+
+        var reader = new FileReader();
+        reader.readAsDataURL(bytesTemaImagem); 
+        reader.onloadend = function() {
+            temaAlterado.fundoTela = reader.result?.toString();
+        }
+        
         let promisesParaResolver: Promise<MdRespostaApi<undefined>>[] = [];
         for (let iDetalheTema of lNaviosTema) {
             let navioTemaParaPush = new PutNavioTema();
@@ -160,36 +184,43 @@ const DetalheTema = () => {
                     <Tab label="Navios" />
                 </Tabs>
                 {idxTab == 0 && <> */}
-                    <div className="row g-0">
-                        <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNome(_ => ev.target.value)} value={nome} disabled={!eAlteracao} />
-                    </div>
-                    <div className="row g-0">
-                        <EncVnTextField label="Preço" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setPreco(_ => UtilNumber.parseFloatOrDefault(ev.target.value))} value={precoAsFormatado} disabled={!eAlteracao}
+                    <div className="row g-0" >
+                        <div className="col-6">
+                            <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNome(_ => ev.target.value)} value={nome} disabled={!eAlteracao} />
+
+                            <EncVnTextField label="Preço" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setPreco(_ => UtilNumber.parseFloatOrDefault(ev.target.value))} value={precoAsFormatado} disabled={!eAlteracao}
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">R$</InputAdornment>,
                             }} />
-                    </div>
-                    <div className="row g-0">
-                        <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} disabled={!eAlteracao} />
-                    </div>
-                    <div className="row g-0">
-                        {/* Botao de upload */}
-                        <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
-                            <span>Tema de fundo de tela:</span>
-                            <label htmlFor="btn-upload" className="ms-3">
-                                <input
-                                id="btn-upload"
-                                name="btn-upload"
-                                style={{ display: 'none' }}
-                                type="file"
-                                onChange={handleTemaArquivoSelecionado} />
-                                <Button
-                                className="btn-choose"
-                                variant="outlined"
-                                component="span" >
-                                    Escolher Arquivo
-                                </Button>
-                            </label>
+
+                            <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} disabled={!eAlteracao} />
+
+                            {/* Botao de upload */}
+                            {eAlteracao ? 
+                                <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
+                                    <span>Tema de fundo de tela:</span>
+                                    <label htmlFor="btn-upload" className="ms-3">
+                                        <input
+                                        id="btn-upload"
+                                        name="btn-upload"
+                                        style={{ display: 'none' }}
+                                        type="file"
+                                        onChange={handleTemaArquivoSelecionado} />
+                                        <Button
+                                        className="btn-choose"
+                                        variant="outlined"
+                                        component="span" >
+                                            Escolher Arquivo
+                                        </Button>
+                                    </label>
+                                </div>
+                            : null}
+                        </div>
+                        <div className="col-6">
+                            <div className="row g-0 mt-3">
+                                {bytesTemaImagem == null ? null : <h6 style={{color: 'black', fontFamily: 'bungee', marginTop: '5px' }}>Fundo de tela:</h6>}
+                                {bytesTemaImagem == null ? null : <img src={srcTemaImagemPrevia} style={{ maxHeight: '100%', maxWidth: '100%', marginTop: '10px' }} />}
+                            </div>
                         </div>
                     </div>
                 {/* </>} */}
