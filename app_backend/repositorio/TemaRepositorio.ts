@@ -23,6 +23,7 @@ class TemaRepositorio extends RepositorioCrud<DbTema> {
             nome: { type: String, required: true },
             preco: { type: Number, required: true },
             descricao: { type: String, required: true },
+            fundoTela: { type: String, required: true },
         });
         this.inicializarMongo('Tema', schema);
     }

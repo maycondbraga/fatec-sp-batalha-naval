@@ -159,6 +159,7 @@ class TemaController extends ControllerBase {
         insertTema.nome = novoTema.nome;
         insertTema.preco = novoTema.preco ?? 0;
         insertTema.descricao = novoTema.descricao;
+        insertTema.fundoTela = novoTema.fundoTela;
         let lInsertNaviosTema: DbNavioTema[] = [];
         for (let iNovoNavioTema of novoTema.naviosTema) {
             let navioTemaParaPush = new DbNavioTema();
@@ -251,6 +252,7 @@ class TemaController extends ControllerBase {
         temaDetalhado.nome = temaDb.nome;
         temaDetalhado.preco = temaDb.preco;
         temaDetalhado.descricao = temaDb.descricao;
+        temaDetalhado.fundoTela = temaDb.fundoTela;
         for (let iNavioTemaDb of naviosTemaDb) {
             let navioTemaParaPush = new MdDetalheNavioTema();
             navioTemaParaPush.id = iNavioTemaDb.id;
@@ -284,6 +286,9 @@ class TemaController extends ControllerBase {
         if (tema.descricao.length == 0) {
             camposNulos.push('Descrição');
         }
+        if (tema.fundoTela == null || tema.fundoTela == ''){
+            camposNulos.push('Tema fundo de tela');
+        }
         if (camposNulos.length > 0) {
             let ex = new MdExcecao();
             ex.codigoExcecao = 400;
@@ -308,6 +313,7 @@ class TemaController extends ControllerBase {
         updateTema.nome = tema.nome;
         updateTema.preco = tema.preco ?? 0;
         updateTema.descricao = tema.descricao;
+        updateTema.fundoTela = tema.fundoTela;
         let lNaviosAtualizados: DbNavioTema[] = [];
         for (let iNavioTema of tema.naviosTema) {
             let navioTemaParaPush = new DbNavioTema();
