@@ -74,6 +74,19 @@ const AdicionarTema = () => {
             return false
         }
     }
+
+    async function blobToBase64Async(blob: Blob): Promise<string> {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.onerror = (e) => reject(fileReader.error);
+          fileReader.onloadend = (e) => {
+            const dataUrl = fileReader.result as string;
+            resolve(dataUrl);
+          };
+          fileReader.readAsDataURL(blob);
+        });
+    }
+
     let precoAsFormatado = formatarPreco(preco);
     // useEffect(() => { precoAsFormatado = formatarPreco(preco) }, [preco]);
 
@@ -94,12 +107,6 @@ const AdicionarTema = () => {
         novoTema.preco = preco;
         novoTema.descricao = descricao;
 
-        var reader = new FileReader();
-        reader.readAsDataURL(bytesTemaImagem); 
-        reader.onloadend = function() {
-            novoTema.fundoTela = reader.result?.toString();
-        }
-        
         let promisesParaResolver: Promise<MdRespostaApi<undefined>>[] = [];
         for (let iDetalheTema of lNaviosTema) {
             let novoNavioTemaParaPush = new PostNovoNavioTema();
@@ -121,6 +128,10 @@ const AdicionarTema = () => {
             setErroEstaAberto(_ => true);
             return;
         }
+
+        const base64 = await blobToBase64Async(bytesTemaImagem);
+        novoTema.fundoTela = base64;
+
         let rAdicao = await clientRest.callPostAutorizado<string>('/api/tema/adicionar', novoTema, '');
         if (rAdicao.eOk) {
             setSucessoAdicaoEstaAberto(_ => true);

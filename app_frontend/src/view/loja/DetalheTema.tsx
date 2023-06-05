@@ -67,9 +67,11 @@ const DetalheTema = () => {
                         setPreco(_ => detalheTema.preco);
                         setDescricao(_ => detalheTema.descricao);
 
-                        fetch(detalheTema.fundoTela)
-                        .then(res => res.blob())
-                        .then(blob => setBytesTemaImagem(_ => blob));
+                        if (detalheTema.fundoTela != ''){
+                            fetch(detalheTema.fundoTela)
+                            .then(res => res.blob())
+                            .then(blob => setBytesTemaImagem(_ => blob));
+                        }
 
                         setLNaviosTema(_ => detalheTema.naviosTema);
                     } else {
@@ -103,6 +105,18 @@ const DetalheTema = () => {
         }
     }
 
+    async function blobToBase64Async(blob: Blob): Promise<string> {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.onerror = (e) => reject(fileReader.error);
+          fileReader.onloadend = (e) => {
+            const dataUrl = fileReader.result as string;
+            resolve(dataUrl);
+          };
+          fileReader.readAsDataURL(blob);
+        });
+    }
+
     let precoAsFormatado = formatarPreco(preco);
     // useEffect(() => { precoAsFormatado = formatarPreco(preco) }, [preco]);
 
@@ -129,12 +143,6 @@ const DetalheTema = () => {
         temaAlterado.preco = preco;
         temaAlterado.descricao = descricao;
 
-        var reader = new FileReader();
-        reader.readAsDataURL(bytesTemaImagem); 
-        reader.onloadend = function() {
-            temaAlterado.fundoTela = reader.result?.toString();
-        }
-
         let promisesParaResolver: Promise<MdRespostaApi<undefined>>[] = [];
         for (let iDetalheTema of lNaviosTema) {
             let navioTemaParaPush = new PutNavioTema();
@@ -155,6 +163,10 @@ const DetalheTema = () => {
             setErroEstaAberto(_ => true);
             return;
         }
+        
+        const base64 = await blobToBase64Async(bytesTemaImagem);
+        temaAlterado.fundoTela = base64;
+
         let rAlteracao = await clientRest.callPutAutorizado<undefined>('/api/tema/alterar', temaAlterado, undefined);
         if (rAlteracao.eOk) {
             setSucessoAlteracaoEstaAberto(_ => true);
