@@ -134,7 +134,7 @@ const DetalheTema = () => {
         reader.onloadend = function() {
             temaAlterado.fundoTela = reader.result?.toString();
         }
-        
+
         let promisesParaResolver: Promise<MdRespostaApi<undefined>>[] = [];
         for (let iDetalheTema of lNaviosTema) {
             let navioTemaParaPush = new PutNavioTema();
@@ -199,13 +199,14 @@ const DetalheTema = () => {
                             {eAlteracao ? 
                                 <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
                                     <span>Tema de fundo de tela:</span>
-                                    <label htmlFor="btn-upload" className="ms-3">
+                                    <label htmlFor="btn-upload-alt-tema" className="ms-3">
                                         <input
-                                        id="btn-upload"
-                                        name="btn-upload"
+                                        id="btn-upload-alt-tema"
+                                        name="btn-upload-alt-tema"
                                         style={{ display: 'none' }}
                                         type="file"
-                                        onChange={handleTemaArquivoSelecionado} />
+                                        accept="image/png, image/jpeg"
+                                        onChange={handleTemaArquivoSelecionado} /> 
                                         <Button
                                         className="btn-choose"
                                         variant="outlined"

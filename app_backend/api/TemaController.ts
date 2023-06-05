@@ -151,9 +151,6 @@ class TemaController extends ControllerBase {
             throw ex;
         }
 
-        // TODO: COLOCAR O BASE64 na base de dados também
-        // TODO: AJUSTAR O FLUXO DE ALTERAR/VER tema
-
         let insertTema = new DbTema();
         insertTema.id = StringUteis.gerarNovoIdDe24Caracteres();
         insertTema.nome = novoTema.nome;
