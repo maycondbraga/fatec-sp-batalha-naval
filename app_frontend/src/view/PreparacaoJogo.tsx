@@ -58,6 +58,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
 
     const [lNaviosParaEnviar, setLNaviosParaEnviar] = useState<PutPosicaoEstrategia[]>([]);
 
+    const [fundoTemaSrc, setFundoTemaSrc] = useState<string>();
     const [temaBarcoPequenoSrc, setTemaBarcoPequenoSrc] = useState<string>();
     const [temaBarcoMedioSrc, setTemaBarcoMedioSrc] = useState<string>();
     const [temaBarcoGrandeSrc, setTemaBarcoGrandeSrc] = useState<string>();
@@ -101,6 +102,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
             const rTemaEquipado = await clientRest.callGetAutorizado<MdDetalheTema>('/api/tema/detalharPorId?id=' + response!.body, new MdDetalheTema());
             const temaEquipado = rTemaEquipado.body ?? new MdDetalheTema();
 
+            setFundoTemaSrc(temaEquipado.fundoTela);
             setTemaBarcoPequenoSrc("data:image/*;base64," + temaEquipado.naviosTema.find(x => x.tamnQuadrados == 1)?.arquivoImagemNavio?.dadosBase64)
             setTemaBarcoMedioSrc("data:image/*;base64," + temaEquipado.naviosTema.find(x => x.tamnQuadrados == 2)?.arquivoImagemNavio?.dadosBase64)
             setTemaBarcoGrandeSrc("data:image/*;base64," + temaEquipado.naviosTema.find(x => x.tamnQuadrados == 3)?.arquivoImagemNavio?.dadosBase64)
@@ -447,7 +449,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
 
     //TODO: Tratar para organizar os elementos corretamente em tela
     return (
-        <div>
+        <div style={{ backgroundImage: 'url("' + fundoTemaSrc + '")',  backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
             <div className='titulo-wrapper'>
                 <h1>HORA DE PREPARAR SEU TABULEIRO</h1>
             </div>
