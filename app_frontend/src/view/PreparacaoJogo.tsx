@@ -550,8 +550,8 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
                     </div>
 
                     <Card sx={{ textAlign: 'center', marginTop: '20px' }}>
-                        <Button disabled={!podeSelecionarPosicoes} onClick={handleEnviarNavioOnClick} sx={{ marginRight: '32px' }}> Enviar objeto para a posição </Button>
-                        <Button disabled={!podeEnviarEstrategia} onClick={handleSalvarEstrategiaOnClick} variant="contained"> Salvar Estratégia </Button>
+                        <Button disabled={!podeSelecionarPosicoes} onClick={handleEnviarNavioOnClick} variant="contained" sx={{ marginRight: '32px' }}> Enviar objeto para a posição </Button>
+                        <Button disabled={!podeEnviarEstrategia} onClick={handleSalvarEstrategiaOnClick} variant="contained" color="success"> Salvar Estratégia </Button>
                     </Card>
                 </>}
                 {estaEsperando && <Card sx={{ border: 1, borderColor: '#9D9D9D', height: '100%' }}>
