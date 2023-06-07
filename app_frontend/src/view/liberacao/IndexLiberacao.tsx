@@ -52,8 +52,8 @@ const IndexLiberacao = () => {
             });
     }, []);
 
-    let qtPaginas = UtilPagina.calcularQtPaginas(lUsuariosLiberaveis.length, 6);
-    let usuariosPaginados = UtilPagina.recortarPagina(lUsuariosLiberaveis, pagina, 6);
+    let qtPaginas = UtilPagina.calcularQtPaginas(lUsuariosLiberaveis.length, 4);
+    let usuariosPaginados = UtilPagina.recortarPagina(lUsuariosLiberaveis, pagina, 4);
     
     return (
         <div>

@@ -60,10 +60,10 @@ const IndexLoja = () => {
         
     }, []);
 
-    let qtPaginas = UtilPagina.calcularQtPaginas(lTemas.length, 6);
+    let qtPaginas = UtilPagina.calcularQtPaginas(lTemas.length, 2);
     // useEffect(() => { qtPaginas = UtilPagina.calcularQtPaginas(lTemas.length, 6); }, [lTemas])
 
-    let temasPaginados = UtilPagina.recortarPagina(lTemas, pagina, 6);
+    let temasPaginados = UtilPagina.recortarPagina(lTemas, pagina, 2);
     // useEffect(() => { temasPaginados = UtilPagina.recortarPagina(lTemas, pagina, 6); }, [lTemas, pagina])
     // console.log(qtPaginas);
     

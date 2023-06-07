@@ -191,6 +191,21 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
         }
     }, [barcoParaReposicionar]) //Gambeta para que o React renderize corretamente os estados no componente criado a partir do DOM nativo
 
+    useEffect(() => {
+        if (fundoTemaSrc != '' && fundoTemaSrc != undefined){
+            let divRoot = document.getElementById("root");
+            
+            fetch(fundoTemaSrc)
+            .then(res => res.blob())
+            .then(blob => {
+                var tmp_path = URL.createObjectURL(blob);
+                divRoot!.style.backgroundRepeat = "no-repeat";
+                divRoot!.style.backgroundSize = "100%";
+                divRoot!.style.backgroundImage = "url('" + tmp_path + "')";
+            });
+        }
+    }, [fundoTemaSrc])
+
     const calculaWidth = (tamanho: number) => {
         return `${tamanho * 30}px`
     }
@@ -449,7 +464,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
 
     //TODO: Tratar para organizar os elementos corretamente em tela
     return (
-        <div style={{ backgroundImage: 'url("' + fundoTemaSrc + '")',  backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+        <div>
             <div className='titulo-wrapper borda_texto'>
                 <h1>HORA DE PREPARAR SEU TABULEIRO</h1>
             </div>

@@ -67,8 +67,8 @@ const IndexMochila = () => {
         }
     }, []);
 
-    let qtPaginas = UtilPagina.calcularQtPaginas(lTemas.length, 6);
-    let temasPaginados = UtilPagina.recortarPagina(lTemas, pagina, 6);
+    let qtPaginas = UtilPagina.calcularQtPaginas(lTemas.length, 2);
+    let temasPaginados = UtilPagina.recortarPagina(lTemas, pagina, 2);
     
     const handleClickEquipar = async (idTema: string) => {
         const putEquiparTema = new PutEquiparTema();

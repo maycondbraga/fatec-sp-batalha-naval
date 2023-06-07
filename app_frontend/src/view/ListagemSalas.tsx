@@ -40,10 +40,10 @@ export default function ListagemSalas(props: ListagemSalasProps) {
     borderRadius: '10px'
 })
 
-  let qtPaginas = UtilPagina.calcularQtPaginas(lSalas.length, 6);
+  let qtPaginas = UtilPagina.calcularQtPaginas(lSalas.length, 4);
     // useEffect(() => { qtPaginas = UtilPagina.calcularQtPaginas(lTemas.length, 6); }, [lTemas])
 
-  let salasPaginadas = UtilPagina.recortarPagina(lSalas, pagina, 6);
+  let salasPaginadas = UtilPagina.recortarPagina(lSalas, pagina, 4);
 
   const { lastJsonMessage, sendJsonMessage } = useWebSocket(props.rotaWs);
   
