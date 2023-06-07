@@ -82,6 +82,11 @@ export default function ListagemSalas(props: ListagemSalasProps) {
   }
   
   useEffect(() => {
+    let divRoot = document.getElementById("root");
+    divRoot!.style.backgroundImage = "none";
+  }, [])
+
+  useEffect(() => {
     carregarSalas();
       
     // Preparar o UserWebSocket no WS

@@ -43,6 +43,11 @@ const IndexMochila = () => {
     const [problemaErro, setProblemaErro] = useState('');
 
     useEffect(() => {
+        let divRoot = document.getElementById("root");
+        divRoot!.style.backgroundImage = "none";
+    }, [])
+
+    useEffect(() => {
         clientRest.callGetAutorizado<MdResumoTema[]>('/api/compra/listarPorIdUsuarioLogado', [])
             .then(async (rLista) => {
                 if (rLista.eOk) {

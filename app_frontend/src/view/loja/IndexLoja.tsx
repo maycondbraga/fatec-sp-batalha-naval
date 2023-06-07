@@ -47,6 +47,11 @@ const IndexLoja = () => {
     const [problemaErro, setProblemaErro] = useState('');
 
     useEffect(() => {
+        let divRoot = document.getElementById("root");
+        divRoot!.style.backgroundImage = "none";
+    }, [])
+
+    useEffect(() => {
         clientRest.callGetAutorizado<MdResumoTema[]>('/api/tema/listar', [])
             .then(rLista => {
                 if (rLista.eOk) {

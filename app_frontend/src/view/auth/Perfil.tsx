@@ -45,6 +45,11 @@ const Perfil = (props: PerfilProps) => {
     const [sucessoAlteracaoEstaAberto, setSucessoAlteracaoEstaAberto] = useState(false);
     
     useEffect(() => {
+        let divRoot = document.getElementById("root");
+        divRoot!.style.backgroundImage = "none";
+    }, [])
+
+    useEffect(() => {
         clientRest.callGetAutorizado<string>('/api/autorizacao/consultarCreditos', '')
             .then(rConsulta => {
                 if (rConsulta.eOk) {

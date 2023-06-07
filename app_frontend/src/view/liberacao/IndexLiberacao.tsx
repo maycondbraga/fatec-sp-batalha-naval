@@ -40,6 +40,11 @@ const IndexLiberacao = () => {
     const [problemaErro, setProblemaErro] = useState('');
 
     useEffect(() => {
+        let divRoot = document.getElementById("root");
+        divRoot!.style.backgroundImage = "none";
+    }, [])
+
+    useEffect(() => {
         clientRest.callGetAutorizado<MdResumoUsuarioLiberavel[]>('/api/liberacao/listar', [])
             .then(rLista => {
                 if (rLista.eOk) {
