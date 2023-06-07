@@ -149,9 +149,8 @@ export default function ListagemSalas(props: ListagemSalasProps) {
 
     <main>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
-      <Container sx={{ mt: 8, py: 1, bgcolor: 'white', borderRadius: '1%' }} maxWidth="md">
+      <Container sx={{ mt: 4, py: 1, bgcolor: 'white', borderRadius: '1%' }} maxWidth="md">
         <Typography sx={{ fontFamily: 'Bungee' }}
-          mt='20px'
           variant="h4"
           align="center"
           color="black"
@@ -159,7 +158,7 @@ export default function ListagemSalas(props: ListagemSalasProps) {
           Salas Disponíveis
         </Typography>
 
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 6 }} maxWidth="md">
           {!estaEsperando && <> <Grid justifyContent="center" container spacing={7}>
             {salasPaginadas.map((sala) => (
               <Grid item key={sala.numeroRecuperacaoUrl} md={5}>
