@@ -6,5 +6,6 @@ export class MdResumoTema {
     preco: number = 0
     descricao: string = ''
     previas: MdPreviaNavio[] = []
+    fundoTela: string = '';
     foiCompradoPorUsuarioLogado: boolean = false
 }

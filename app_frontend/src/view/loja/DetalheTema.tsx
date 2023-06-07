@@ -34,6 +34,7 @@ const DetalheTema = () => {
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState<number | null>(null);
     const [descricao, setDescricao] = useState('');
+    const [bytesTemaImagem, setBytesTemaImagem] = useState<Blob | null>(null);
     // const [idxTab, setIdxTab] = useState(0);
     const [popupNaviosTemaEstaAberto, setPopupNaviosTemaEstaAberto] = useState(false);
     const [lNaviosTema, setLNaviosTema] = useState<MdDetalheNavioTema[]>([]);
@@ -41,6 +42,15 @@ const DetalheTema = () => {
     const [erroEstaAberto, setErroEstaAberto] = useState(false);
     const [problemaErro, setProblemaErro] = useState('');
     const [sucessoAlteracaoEstaAberto, setSucessoAlteracaoEstaAberto] = useState(false);
+
+    const calcularSrcTemaImagemPrevia = (): string => {
+        if (bytesTemaImagem != null)
+            return URL.createObjectURL(bytesTemaImagem);
+        return '';
+    }
+    
+    const [srcTemaImagemPrevia, setSrcTemaImagemPrevia] = useState(calcularSrcTemaImagemPrevia());
+    useEffect(() => setSrcTemaImagemPrevia(calcularSrcTemaImagemPrevia()), [bytesTemaImagem]);
 
     let eAlteracao = searchParams.get('eAlteracao') == 'S';
     useEffect(() => {
@@ -56,6 +66,13 @@ const DetalheTema = () => {
                         setNome(_ => detalheTema.nome);
                         setPreco(_ => detalheTema.preco);
                         setDescricao(_ => detalheTema.descricao);
+
+                        if (detalheTema.fundoTela != ''){
+                            fetch(detalheTema.fundoTela)
+                            .then(res => res.blob())
+                            .then(blob => setBytesTemaImagem(_ => blob));
+                        }
+
                         setLNaviosTema(_ => detalheTema.naviosTema);
                     } else {
                         setProblemaErro(rDetalhe.problema);
@@ -64,6 +81,10 @@ const DetalheTema = () => {
                 });
         }
     }, []);
+
+    const handleTemaArquivoSelecionado = (event: any) => {
+        setBytesTemaImagem(_ => event.target.files[0]);
+    }
 
     const formatarPreco = (precoRaw: number | null): string => {
         if (precoRaw == null) {
@@ -84,6 +105,18 @@ const DetalheTema = () => {
         }
     }
 
+    async function blobToBase64Async(blob: Blob): Promise<string> {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.onerror = (e) => reject(fileReader.error);
+          fileReader.onloadend = (e) => {
+            const dataUrl = fileReader.result as string;
+            resolve(dataUrl);
+          };
+          fileReader.readAsDataURL(blob);
+        });
+    }
+
     let precoAsFormatado = formatarPreco(preco);
     // useEffect(() => { precoAsFormatado = formatarPreco(preco) }, [preco]);
 
@@ -91,6 +124,11 @@ const DetalheTema = () => {
         const tryIdTema = searchParams.get('id');
         if (!validarNavios(lNaviosTema)){
             setProblemaErro(_ => 'Faltam objetos a serem adicionados');
+            setErroEstaAberto(_ => true);
+            return;
+        }
+        if (bytesTemaImagem == null || bytesTemaImagem.size <= 0){
+            setProblemaErro(_ => 'É necessário ter um tema de fundo de tela selecionado.');
             setErroEstaAberto(_ => true);
             return;
         }
@@ -104,6 +142,7 @@ const DetalheTema = () => {
         temaAlterado.nome = nome;
         temaAlterado.preco = preco;
         temaAlterado.descricao = descricao;
+
         let promisesParaResolver: Promise<MdRespostaApi<undefined>>[] = [];
         for (let iDetalheTema of lNaviosTema) {
             let navioTemaParaPush = new PutNavioTema();
@@ -124,6 +163,10 @@ const DetalheTema = () => {
             setErroEstaAberto(_ => true);
             return;
         }
+        
+        const base64 = await blobToBase64Async(bytesTemaImagem);
+        temaAlterado.fundoTela = base64;
+
         let rAlteracao = await clientRest.callPutAutorizado<undefined>('/api/tema/alterar', temaAlterado, undefined);
         if (rAlteracao.eOk) {
             setSucessoAlteracaoEstaAberto(_ => true);
@@ -145,7 +188,7 @@ const DetalheTema = () => {
 
     return (
         <>
-            <h1 style={{color: 'white', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>{eAlteracao ? 'Alterar Tema' : 'Detalhes do Tema'}</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>{eAlteracao ? 'Alterar Tema' : 'Detalhes do Tema'}</h1>
 
             <Box className='box'>
                 {/* <Tabs value={idxTab} onChange={(ev, nextIdxTab) => setIdxTab(_ => nextIdxTab)} aria-label="basic tabs example">
@@ -153,17 +196,45 @@ const DetalheTema = () => {
                     <Tab label="Navios" />
                 </Tabs>
                 {idxTab == 0 && <> */}
-                    <div className="row g-0">
-                        <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNome(_ => ev.target.value)} value={nome} disabled={!eAlteracao} />
-                    </div>
-                    <div className="row g-0">
-                        <EncVnTextField label="Preço" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setPreco(_ => UtilNumber.parseFloatOrDefault(ev.target.value))} value={precoAsFormatado} disabled={!eAlteracao}
+                    <div className="row g-0" >
+                        <div className="col-6">
+                            <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNome(_ => ev.target.value)} value={nome} disabled={!eAlteracao} />
+
+                            <EncVnTextField label="Preço" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setPreco(_ => UtilNumber.parseFloatOrDefault(ev.target.value))} value={precoAsFormatado} disabled={!eAlteracao}
                             InputProps={{
                                 startAdornment: <InputAdornment position="start">R$</InputAdornment>,
                             }} />
-                    </div>
-                    <div className="row g-0">
-                        <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} disabled={!eAlteracao} />
+
+                            <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} disabled={!eAlteracao} />
+
+                            {/* Botao de upload */}
+                            {eAlteracao ? 
+                                <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
+                                    <span>Tema de fundo de tela:</span>
+                                    <label htmlFor="btn-upload-alt-tema" className="ms-3">
+                                        <input
+                                        id="btn-upload-alt-tema"
+                                        name="btn-upload-alt-tema"
+                                        style={{ display: 'none' }}
+                                        type="file"
+                                        accept="image/png, image/jpeg"
+                                        onChange={handleTemaArquivoSelecionado} /> 
+                                        <Button
+                                        className="btn-choose"
+                                        variant="outlined"
+                                        component="span" >
+                                            Escolher Arquivo
+                                        </Button>
+                                    </label>
+                                </div>
+                            : null}
+                        </div>
+                        <div className="col-6">
+                            <div className="row g-0 mt-3">
+                                {bytesTemaImagem == null ? null : <h6 style={{color: 'black', fontFamily: 'bungee', marginTop: '5px' }}>Fundo de tela:</h6>}
+                                {bytesTemaImagem == null ? null : <img src={srcTemaImagemPrevia} style={{ maxHeight: '100%', maxWidth: '100%', marginTop: '10px' }} />}
+                            </div>
+                        </div>
                     </div>
                 {/* </>} */}
                 {/* {idxTab == 1 && <ManterListaNavioTema lNaviosTema={lNaviosTema} setLNaviosTema={setLNaviosTema} />} */}

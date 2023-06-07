@@ -19,7 +19,7 @@ import ImgNavioHorizontal from '../components/imagem/ImgNavioHorizontal';
 import { PostTiroFluxo } from "../modelos/importarBack/PostTiroFluxo";
 import { MdDetalheTema } from "../modelos/importarBack/MdDetalheTema";
 
-const SEGUNDOS_TIMER = 30;
+const SEGUNDOS_TIMER = 15;
 
 const CircularProgressWithLabel = (
     props: CircularProgressProps & { value: number },
@@ -73,6 +73,7 @@ const TelaJogo = (props: TelaJogoProps) => {
     const [progressoJogadorInimigo, setProgressoJogadorInimigo] = useState<MdProgressoNaviosJogador | null>(null);
     const [estaEsperandoInimigoAtirar, setEstaEsperandoInimigoAtirar] = useState(false);
 
+    const [fundoTemaSrc, setFundoTemaSrc] = useState<string>();
     const [temaBarcoPequenoSrc, setTemaBarcoPequenoSrc] = useState<string>();
     const [temaBarcoMedioSrc, setTemaBarcoMedioSrc] = useState<string>();
     const [temaBarcoGrandeSrc, setTemaBarcoGrandeSrc] = useState<string>();
@@ -293,6 +294,7 @@ const TelaJogo = (props: TelaJogoProps) => {
             const idTemaEquipado = await clientRest.callGetAutorizado<string>('/api/compra/obterIdTemaEquipadoUsuarioLogadoOrDefault', '');
             const temaEquipado = response.body!.find(x => x.id == idTemaEquipado.body)
 
+            setFundoTemaSrc(temaEquipado?.fundoTela);
             setTemaBarcoPequenoSrc("data:image/*;base64," + temaEquipado?.previas.find(x => x.tamanhoQuadrados == 1)?.arquivo?.dadosBase64)
             setTemaBarcoMedioSrc("data:image/*;base64," + temaEquipado?.previas.find(x => x.tamanhoQuadrados == 2)?.arquivo?.dadosBase64)
             setTemaBarcoGrandeSrc("data:image/*;base64," + temaEquipado?.previas.find(x => x.tamanhoQuadrados == 3)?.arquivo?.dadosBase64)
@@ -400,8 +402,8 @@ const TelaJogo = (props: TelaJogoProps) => {
     }
 
     return (
-        <div>
-            <div className='titulo-wrapper'>
+        <div style={{ backgroundImage: 'url("' + fundoTemaSrc + '")',  backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+            <div className='titulo-wrapper borda_texto'>
                 <h1>BATTLE OF OCEAN</h1>
             </div>
             <div className="container-tabuleiros">

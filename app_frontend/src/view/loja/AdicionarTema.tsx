@@ -1,5 +1,5 @@
 import { Box, Button, InputAdornment, styled, Tab, Tabs, TextField, Dialog, DialogContent, DialogActions } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ErroModal from '../../components/erroModal/ErroModal';
 import SucessoModal from '../../components/sucessoModal/SucessoModal';
@@ -30,6 +30,7 @@ const AdicionarTema = () => {
     const [nome, setNome] = useState('');
     const [preco, setPreco] = useState<number | null>(null);
     const [descricao, setDescricao] = useState('');
+    const [bytesTemaImagem, setBytesTemaImagem] = useState<Blob | null>(null);
     // const [idxTab, setIdxTab] = useState(0);
     const [popupNaviosTemaEstaAberto, setPopupNaviosTemaEstaAberto] = useState(false);
     const [lNaviosTema, setLNaviosTema] = useState<MdDetalheNavioTema[]>([]);
@@ -38,6 +39,21 @@ const AdicionarTema = () => {
     const [problemaErro, setProblemaErro] = useState('');
 
     const [sucessoAdicaoEstaAberto, setSucessoAdicaoEstaAberto] = useState(false);
+
+    const calcularSrcTemaImagemPrevia = (): string => {
+        if (bytesTemaImagem != null)
+            return URL.createObjectURL(bytesTemaImagem);
+        return '';
+    }
+    const [srcTemaImagemPrevia, setSrcTemaImagemPrevia] = useState(calcularSrcTemaImagemPrevia());
+    
+    useEffect(() => 
+        setSrcTemaImagemPrevia(_ => calcularSrcTemaImagemPrevia()),
+    [bytesTemaImagem]);
+
+    const handleTemaArquivoSelecionado = (event: any) => {
+        setBytesTemaImagem(_ => event.target.files[0]);
+    }
 
     const formatarPreco = (precoRaw: number | null): string => {
         if (precoRaw == null) {
@@ -58,6 +74,19 @@ const AdicionarTema = () => {
             return false
         }
     }
+
+    async function blobToBase64Async(blob: Blob): Promise<string> {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.onerror = (e) => reject(fileReader.error);
+          fileReader.onloadend = (e) => {
+            const dataUrl = fileReader.result as string;
+            resolve(dataUrl);
+          };
+          fileReader.readAsDataURL(blob);
+        });
+    }
+
     let precoAsFormatado = formatarPreco(preco);
     // useEffect(() => { precoAsFormatado = formatarPreco(preco) }, [preco]);
 
@@ -67,10 +96,17 @@ const AdicionarTema = () => {
             setErroEstaAberto(_ => true);
             return;
         }
+        if (bytesTemaImagem == null || bytesTemaImagem.size <= 0){
+            setProblemaErro(_ => 'É necessário ter um tema de fundo de tela selecionado.');
+            setErroEstaAberto(_ => true);
+            return;
+        }
+
         let novoTema = new PostNovoTema();
         novoTema.nome = nome;
         novoTema.preco = preco;
         novoTema.descricao = descricao;
+
         let promisesParaResolver: Promise<MdRespostaApi<undefined>>[] = [];
         for (let iDetalheTema of lNaviosTema) {
             let novoNavioTemaParaPush = new PostNovoNavioTema();
@@ -92,6 +128,10 @@ const AdicionarTema = () => {
             setErroEstaAberto(_ => true);
             return;
         }
+
+        const base64 = await blobToBase64Async(bytesTemaImagem);
+        novoTema.fundoTela = base64;
+
         let rAdicao = await clientRest.callPostAutorizado<string>('/api/tema/adicionar', novoTema, '');
         if (rAdicao.eOk) {
             setSucessoAdicaoEstaAberto(_ => true);
@@ -103,24 +143,50 @@ const AdicionarTema = () => {
 
     return (
         <>
-            <h1 style={{color: 'white', fontFamily: 'Righteous', textAlign: 'center', marginTop: '16px' }}>Adicionar Tema</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Adicionar Tema</h1>
             <Box className='box'>
                 {/* <Tabs value={idxTab} onChange={(ev, nextIdxTab) => setIdxTab(_ => nextIdxTab)} aria-label="basic tabs example">
                     <Tab label="Dados de Resumo" />
                     <Tab label="Navios" />
                 </Tabs> */}
                 {/* {idxTab == 0 && <> */}
-                    <div className="row g-0">
-                        <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNome(_ => ev.target.value)} value={nome} />
-                    </div>
-                    <div className="row g-0">
-                        <EncVnTextField label="Preço" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setPreco(_ => UtilNumber.parseFloatOrDefault(ev.target.value))} 
-                        value={precoAsFormatado} InputProps={{
-                            startAdornment: <InputAdornment position="start">R$</InputAdornment>,
-                        }} />
-                    </div>
-                    <div className="row g-0">
-                        <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} />
+                    <div className="row g-0" >
+                        <div className="col-6">
+                            <EncVnTextField label="Nome" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNome(_ => ev.target.value)} value={nome} />
+
+                            <EncVnTextField label="Preço" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setPreco(_ => UtilNumber.parseFloatOrDefault(ev.target.value))} 
+                            value={precoAsFormatado} InputProps={{
+                                startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                            }} />
+
+                            <EncVnTextField multiline rows={4} label="Descrição" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setDescricao(_ => ev.target.value)} value={descricao} />
+                            
+                            {/* Botao de upload */}
+                            <div className="d-flex mt-3 align-items-center" style={{ margin: '5px' }}>
+                                <span>Tema de fundo de tela:</span>
+                                <label htmlFor="btn-upload-tema" className="ms-3">
+                                    <input
+                                    id="btn-upload-tema"
+                                    name="btn-upload-tema"
+                                    style={{ display: 'none' }}
+                                    type="file"
+                                    accept="image/png, image/jpeg"
+                                    onChange={handleTemaArquivoSelecionado} />
+                                    <Button
+                                    className="btn-choose"
+                                    variant="outlined"
+                                    component="span" >
+                                        Escolher Arquivo
+                                    </Button>
+                                </label>
+                            </div>
+                        </div>
+                        <div className="col-6">
+                        <div className="row g-0 mt-3">
+                                {bytesTemaImagem == null ? null : <h6 style={{color: 'black', fontFamily: 'bungee', marginTop: '5px' }}>Fundo de tela:</h6>}
+                                {bytesTemaImagem == null ? null : <img src={srcTemaImagemPrevia} style={{ maxHeight: '100%', maxWidth: '100%', marginTop: '10px' }} />}
+                            </div>
+                        </div>
                     </div>
                 {/* </>} */}
                 {/* {idxTab == 1 && <ManterListaNavioTema lNaviosTema={lNaviosTema} setLNaviosTema={setLNaviosTema} />} */}

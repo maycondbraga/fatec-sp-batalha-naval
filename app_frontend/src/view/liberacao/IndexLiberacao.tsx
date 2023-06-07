@@ -40,6 +40,11 @@ const IndexLiberacao = () => {
     const [problemaErro, setProblemaErro] = useState('');
 
     useEffect(() => {
+        let divRoot = document.getElementById("root");
+        divRoot!.style.backgroundImage = "none";
+    }, [])
+
+    useEffect(() => {
         clientRest.callGetAutorizado<MdResumoUsuarioLiberavel[]>('/api/liberacao/listar', [])
             .then(rLista => {
                 if (rLista.eOk) {
@@ -52,13 +57,13 @@ const IndexLiberacao = () => {
             });
     }, []);
 
-    let qtPaginas = UtilPagina.calcularQtPaginas(lUsuariosLiberaveis.length, 6);
-    let usuariosPaginados = UtilPagina.recortarPagina(lUsuariosLiberaveis, pagina, 6);
+    let qtPaginas = UtilPagina.calcularQtPaginas(lUsuariosLiberaveis.length, 4);
+    let usuariosPaginados = UtilPagina.recortarPagina(lUsuariosLiberaveis, pagina, 4);
     
     return (
         <div>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
-            <h1 style={{color: 'white', fontFamily: 'Righteous', textAlign: 'center', marginTop: '16px' }}>Usuários</h1>
+            <h1 style={{color: 'black', fontFamily: 'bungee', textAlign: 'center', marginTop: '16px' }}>Usuários</h1>
             {!carregouUsuarios && <div className='d-flex justify-content-center w-100'>
                 <CircularProgress />
             </div>}

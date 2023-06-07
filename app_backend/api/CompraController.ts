@@ -184,6 +184,7 @@ class CompraController extends ControllerBase {
             iTemaParaPush.nome = iTemaDb.nome;
             iTemaParaPush.preco = iTemaDb.preco;
             iTemaParaPush.descricao = iTemaDb.descricao;
+            iTemaParaPush.fundoTela = iTemaDb.fundoTela;
             
             // Loop nos naviosTema para pegar cada previa
             iTemaParaPush.previas = [];

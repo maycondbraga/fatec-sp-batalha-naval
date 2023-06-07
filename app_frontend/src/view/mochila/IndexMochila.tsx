@@ -43,6 +43,11 @@ const IndexMochila = () => {
     const [problemaErro, setProblemaErro] = useState('');
 
     useEffect(() => {
+        let divRoot = document.getElementById("root");
+        divRoot!.style.backgroundImage = "none";
+    }, [])
+
+    useEffect(() => {
         clientRest.callGetAutorizado<MdResumoTema[]>('/api/compra/listarPorIdUsuarioLogado', [])
             .then(async (rLista) => {
                 if (rLista.eOk) {
@@ -67,8 +72,8 @@ const IndexMochila = () => {
         }
     }, []);
 
-    let qtPaginas = UtilPagina.calcularQtPaginas(lTemas.length, 6);
-    let temasPaginados = UtilPagina.recortarPagina(lTemas, pagina, 6);
+    let qtPaginas = UtilPagina.calcularQtPaginas(lTemas.length, 2);
+    let temasPaginados = UtilPagina.recortarPagina(lTemas, pagina, 2);
     
     const handleClickEquipar = async (idTema: string) => {
         const putEquiparTema = new PutEquiparTema();

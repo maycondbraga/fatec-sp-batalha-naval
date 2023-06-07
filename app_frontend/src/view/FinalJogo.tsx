@@ -13,6 +13,9 @@ export default function FinalJogo() {
   const somDerrota = useMemo(() => new Audio('/assets/Defeat.mp3'), [])
 
   useEffect(() => {
+    let divRoot = document.getElementById("root");
+    divRoot!.style.backgroundImage = "none";
+    
     if (ganhou == 'S') {
       somVitoria.play();
       return () => {

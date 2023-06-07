@@ -135,6 +135,9 @@ class TemaController extends ControllerBase {
         if (novoTema.descricao.length == 0) {
             camposNulos.push('Descrição');
         }
+        if (novoTema.fundoTela == null || novoTema.fundoTela == ''){
+            camposNulos.push('Tema fundo de tela');
+        }
         if (camposNulos.length > 0) {
             let ex = new MdExcecao();
             ex.codigoExcecao = 400;
@@ -147,11 +150,13 @@ class TemaController extends ControllerBase {
             ex.problema = 'É obrigatório preencher pelo menos uma personalização para adicionar um tema.';
             throw ex;
         }
+
         let insertTema = new DbTema();
         insertTema.id = StringUteis.gerarNovoIdDe24Caracteres();
         insertTema.nome = novoTema.nome;
         insertTema.preco = novoTema.preco ?? 0;
         insertTema.descricao = novoTema.descricao;
+        insertTema.fundoTela = novoTema.fundoTela;
         let lInsertNaviosTema: DbNavioTema[] = [];
         for (let iNovoNavioTema of novoTema.naviosTema) {
             let navioTemaParaPush = new DbNavioTema();
@@ -244,6 +249,7 @@ class TemaController extends ControllerBase {
         temaDetalhado.nome = temaDb.nome;
         temaDetalhado.preco = temaDb.preco;
         temaDetalhado.descricao = temaDb.descricao;
+        temaDetalhado.fundoTela = temaDb.fundoTela;
         for (let iNavioTemaDb of naviosTemaDb) {
             let navioTemaParaPush = new MdDetalheNavioTema();
             navioTemaParaPush.id = iNavioTemaDb.id;
@@ -271,11 +277,14 @@ class TemaController extends ControllerBase {
         if (tema.nome.length == 0) {
             camposNulos.push('Nome');
         }
-        if (tema.preco == null || tema.preco <= 0) {
+        if (tema.preco == null || tema.preco < 0) {
             camposNulos.push('Preço');
         }
         if (tema.descricao.length == 0) {
             camposNulos.push('Descrição');
+        }
+        if (tema.fundoTela == null || tema.fundoTela == ''){
+            camposNulos.push('Tema fundo de tela');
         }
         if (camposNulos.length > 0) {
             let ex = new MdExcecao();
@@ -301,6 +310,7 @@ class TemaController extends ControllerBase {
         updateTema.nome = tema.nome;
         updateTema.preco = tema.preco ?? 0;
         updateTema.descricao = tema.descricao;
+        updateTema.fundoTela = tema.fundoTela;
         let lNaviosAtualizados: DbNavioTema[] = [];
         for (let iNavioTema of tema.naviosTema) {
             let navioTemaParaPush = new DbNavioTema();

@@ -6,8 +6,10 @@ export class DbTema extends DbEncVn {
         this.nome = '';
         this.preco = 0;
         this.descricao = '';
+        this.fundoTela = '';
     }
     nome: string
     preco: number 
     descricao: string
+    fundoTela: string
 }

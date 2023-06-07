@@ -15,8 +15,14 @@
     max-height: 100vh;
 }
 
+.borda_texto{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #ffffff;
+    font-size: 3em; color: #fffdd9;
+}
+
 .titulo-wrapper {
-    padding: 50px 20px;
+    padding: 20px 20px;
     text-align: center;
 }
 .titulo-wrapper h1 {

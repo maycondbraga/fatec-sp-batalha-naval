@@ -86,6 +86,11 @@ const Entrar = () => {
     const [emailCadastro, setEmailCadastro] = useState('');
     const [senhaCadastro, setSenhaCadastro] = useState('');
 
+    useEffect(() => {
+        let divRoot = document.getElementById("root");
+        divRoot!.style.backgroundImage = "none";
+    }, [])
+
     const handleChangeNomeCadastro = (arg: string) => {
         setNomeCadastro(_ => arg);
     }
