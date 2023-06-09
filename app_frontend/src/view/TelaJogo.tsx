@@ -98,6 +98,8 @@ const TelaJogo = (props: TelaJogoProps) => {
     const [problemaErro, setProblemaErro] = useState('');
     const [erroOponenteSaiuEstaAberto, setErroOponenteSaiuEstaAberto] = useState(false);
 
+    const [numeroPropagandaAnuncio, setNumeroPropagandaAnuncio] = useState<string>();
+
     const gerarAnimacaoDeHit = (progressoJogador: MdProgressoNaviosJogador, prefixPosicao: string, gifAcertoSrc: string, gifErroSrc: string) => {
         const coordenadaUltimoTiro = progressoJogador.tiros[progressoJogador.tiros.length - 1]
         const ultimaPosicaoMarcada = document.getElementById(`${prefixPosicao}-${coordenadaUltimoTiro.numeroLinha}${coordenadaUltimoTiro.numeroColuna}`)
@@ -125,6 +127,17 @@ const TelaJogo = (props: TelaJogoProps) => {
         }, 900)
     }
 
+    useEffect(() => {
+        let divRoot = document.getElementById("root");
+        divRoot!.style.backgroundImage = "none";
+    }, [])
+
+    useEffect(() => {
+        let min = 1;
+        let max = 10;
+        let numRandom = min + (Math.random() * (max - min));
+        setNumeroPropagandaAnuncio(_ => Math.round(numRandom).toString()); 
+    }, [])
 
     useEffect(() => {
         musicaJogo.loop = true;
@@ -519,7 +532,9 @@ const TelaJogo = (props: TelaJogoProps) => {
             </div>
             
             <div className="container-anuncio">
-                <Typography style={{ fontFamily: "bungee", color: "white"}}>ANUNCIANTE PAGO</Typography>
+                <a target="_blank" rel="noopener noreferrer" href="https://adsense.google.com/intl/pt-BR_br/start/">
+                    <img src= { "/assets/propagandas/propaganda_mock"+ numeroPropagandaAnuncio +".png" } alt="Propaganda do Battle of Ocean" width="728" height="90"></img>
+                </a>
             </div>
             <br />
             <ErroModal estaAberto={erroEstaAberto} onFechar={() => setErroEstaAberto(_ => false)} problema={problemaErro} />
