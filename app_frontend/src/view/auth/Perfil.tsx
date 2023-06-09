@@ -46,7 +46,9 @@ const Perfil = (props: PerfilProps) => {
     
     useEffect(() => {
         let divRoot = document.getElementById("root");
-        divRoot!.style.backgroundImage = "none";
+        divRoot!.style.backgroundRepeat = "no-repeat";
+        divRoot!.style.backgroundSize = "cover";
+        divRoot!.style.backgroundImage = "url('../assets/fundo-padrao-battle-of-ocean.png')";
     }, [])
 
     useEffect(() => {
