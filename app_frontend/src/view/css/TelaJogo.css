@@ -6,9 +6,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 600px;
-    height: 120px;
-    background: gray;
 }
 
 .container-tabuleiros {

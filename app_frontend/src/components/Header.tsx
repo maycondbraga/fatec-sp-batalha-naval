@@ -48,10 +48,7 @@ const Header = (props: HeaderProps) => {
     const logOut = () => {
         localStorage.removeItem('user');
         localStorage.clear();
-        
-        setTimeout(function(){
-            window.location.reload();
-         }, 1000);
+        window.location.reload();
     }
 
     //const pages = [{label: 'Home', href: ''}, {label: 'Entrar', href: 'auth/entrar'}, {label: 'Loja', href: 'loja'}, {label: 'Sala de jogo', href: 'game/123'}];
@@ -70,7 +67,7 @@ const Header = (props: HeaderProps) => {
 
     const defineSettings = () => {
         if (loggedIn) {
-            return [{ label: 'Perfil', href: 'perfil', onclick: () => {} }, {label: 'Logout', href: '', onclick: logOut }];
+            return [{ label: 'Perfil', href: 'perfil', onclick: () => {} }, {label: 'Logout', href: 'auth/entrar', onclick: logOut }];
         }
 
         return [{ label: 'Login', href: 'auth/entrar', onclick: () => {} }];;

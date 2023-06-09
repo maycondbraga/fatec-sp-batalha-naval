@@ -158,7 +158,7 @@ const Entrar = () => {
                                             <EncVnTextField label="Email" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeEmail(ev.target.value)} value={email} />
                                             <EncVnTextField label="Senha" type="password" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => handleChangeSenha(ev.target.value)} value={senha} />
                                             <Button variant="contained" size="medium" className="mt-4" sx={{ width: 200 }} onClick={() => handleClickEntrarUsuarioEncVn()}>Entrar</Button>
-                                            <GoogleAuthBotao />
+                                            {/* <GoogleAuthBotao /> */}
                                         </div>
                                     </CardContent>
                                     <CardActions className="d-flex justify-content-center">

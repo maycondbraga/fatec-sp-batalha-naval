@@ -83,7 +83,9 @@ export default function ListagemSalas(props: ListagemSalasProps) {
   
   useEffect(() => {
     let divRoot = document.getElementById("root");
-    divRoot!.style.backgroundImage = "none";
+    divRoot!.style.backgroundRepeat = "no-repeat";
+    divRoot!.style.backgroundSize = "cover";
+    divRoot!.style.backgroundImage = "url('../assets/fundo-padrao-battle-of-ocean.png')";
   }, [])
 
   useEffect(() => {
@@ -154,7 +156,7 @@ export default function ListagemSalas(props: ListagemSalasProps) {
 
     <main>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous"></link>
-      <Container sx={{ mt: 4, py: 1, bgcolor: 'white', borderRadius: '1%' }} maxWidth="md">
+      <Container sx={{ mt: 4, py: 1, borderRadius: '1%' }} maxWidth="md">
         <Typography sx={{ fontFamily: 'Bungee' }}
           variant="h4"
           align="center"
