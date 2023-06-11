@@ -91,10 +91,10 @@ const AlterarNavioTema = (props: AlterarNavioTemaProps) => {
         try {
             tamnQuadradosAsNumber = parseInt(tamnQuadradosAsString);
             if (LiteralNavio.obterPorTamnQuadradosOrDefault(tamnQuadradosAsNumber) == null) {
-                camposNulos.push('Tamanho Objetos');
+                camposNulos.push('Ocupação de slots');
             }
         } catch (er) {
-            camposNulos.push('Tamanho Objetos');
+            camposNulos.push('Ocupação de slots');
         }
         if (nomePersonalizado.length == 0) {
             camposNulos.push('Nome Personalizado');
@@ -127,8 +127,8 @@ const AlterarNavioTema = (props: AlterarNavioTemaProps) => {
             
                 <div className="row g-0">
                     <FormControl>
-                            <InputLabel>Tamanho Objetos</InputLabel>
-                        <Select value={tamnQuadradosAsString} label="Tamanho Objetos" onChange={ev => setTamnQuadradosAsString(_ => (ev.target.value as string))} >
+                            <InputLabel>Slots ocupados no tabuleiro</InputLabel>
+                        <Select value={tamnQuadradosAsString} label="Ocupação de slots" onChange={ev => setTamnQuadradosAsString(_ => (ev.target.value as string))} >
                             <MenuItem value="">
                                 <span>Selecione...</span>
                             </MenuItem>
@@ -142,7 +142,6 @@ const AlterarNavioTema = (props: AlterarNavioTemaProps) => {
                         </Select>
 
                     </FormControl>
-                    <EncVnTextField label="Tamanho (quantidade)" type="number" variant="outlined" className="mt-4" sx={{ width: 350 }} value={tamnQuadradosAsString} disabled />
                 </div>
                 <div className="row g-0">
                     <EncVnTextField label="Nome Personalizado" variant="outlined" className="mt-4" sx={{ width: 350 }} onChange={ev => setNomePersonalizado(_ => ev.target.value)} value={nomePersonalizado} />

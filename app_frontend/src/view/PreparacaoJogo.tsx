@@ -553,11 +553,11 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
                             </Tooltip>
 
                             <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black", marginTop: '20px' }}>INSTRUÇÕES PARA JOGAR</Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>1° - Selecione um objeto dos disponíveis acima </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>2° - Marque as posições que ele deve ocupar no tabuleiro (Deve-se marcar todas) </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>3° - Clique em Enviar objeto para a posição </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>4° - Caso deseje reposicionar um objeto, <br /> basta selecioná-lo no tabuleiro e escolher a nova posição </Typography>
-                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'gray' }}>5° - Quando posicionar as dez objetos, clique em Salvar Estratégia</Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'black' }}>1° - Selecione um objeto dos disponíveis acima </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'black' }}>2° - Marque as posições que ele deve ocupar no tabuleiro (Deve-se marcar todas) </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'black' }}>3° - Clique em Enviar objeto para a posição </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'black' }}>4° - Caso deseje reposicionar um objeto, <br /> basta selecioná-lo no tabuleiro e escolher a nova posição </Typography>
+                            <Typography textAlign="center" style={{ fontFamily: "bungee", marginTop: '20px', fontSize: '9pt', color: 'black' }}>5° - Quando posicionar as dez objetos, clique em Salvar Estratégia</Typography>
                         </div>
                         <div style={{ marginLeft: '10px' }}>
                             <PosicaoContainer handlePosicaoOnClick={handlePosicaoOnClick} idPrefix='user' clickable={podeSelecionarPosicoes} />

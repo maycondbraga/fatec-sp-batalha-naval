@@ -10,6 +10,19 @@
 
 .container-tabuleiros {
     background-color: white;
+    opacity: 80%;
+    width: 60vw;
+    max-width: 60vw;
+    padding-top: 2vh;
+    border-radius: 10px;
+    margin: auto;
+    padding: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.container-tabuleiros-jogo {
     width: 60vw;
     max-width: 60vw;
     padding-top: 2vh;
