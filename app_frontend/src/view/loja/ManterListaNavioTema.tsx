@@ -77,15 +77,14 @@ const ManterListaNavioTema = (props: ManterListaNavioTemaProps) => {
 
     return (
         <>
-            <h3>Lista de Personalizações</h3>
+            <h3>Lista de Personalização</h3>
             {props.lNaviosTema.length > 0 && <>
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} size="small" aria-label="Lista de personalizações">
+                    <Table sx={{ minWidth: 650 }} size="small" aria-label="Lista de Personalização">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Tamanho Objetos</TableCell>
+                                <TableCell>Ocupação de slots</TableCell>
                                 <TableCell align="right">Nome</TableCell>
-                                <TableCell align="right">Tamanho (quantidade)</TableCell>
                                 <TableCell align="right">Imagem</TableCell>
                                 <TableCell align="right"></TableCell>
                                 <TableCell align="right"></TableCell>
@@ -101,7 +100,6 @@ const ManterListaNavioTema = (props: ManterListaNavioTemaProps) => {
                                     {LiteralNavio.obterPorTamnQuadradosOrDefault(elNavioTema.tamnQuadrados)?.nome ?? ''}
                                 </TableCell>
                                 <TableCell align="right">{elNavioTema.nomePersonalizado}</TableCell>
-                                <TableCell align="right">{elNavioTema.tamnQuadrados}</TableCell>
                                 <TableCell align="right">
                                     {<ImgNavioHorizontal
                                         dadosBase64={elNavioTema.bytesParaUploadArquivo == null ? elNavioTema.arquivoImagemNavio?.dadosBase64 ?? '' : ''}

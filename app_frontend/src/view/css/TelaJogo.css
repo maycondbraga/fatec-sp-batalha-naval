@@ -9,7 +9,7 @@
 }
 
 .container-tabuleiros {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
     width: 60vw;
     max-width: 60vw;
     padding-top: 2vh;

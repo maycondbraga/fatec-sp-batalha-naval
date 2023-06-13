@@ -42,7 +42,7 @@ const CircularProgressWithLabel = (
                 <Typography
                     variant="caption"
                     component="div"
-                    color="text.secondary"
+                    color="black"
                 >{`${Math.ceil((1 - props.value * 0.01) * SEGUNDOS_TIMER)}s`}</Typography>
             </Box>
         </Box>
@@ -56,7 +56,7 @@ export interface TelaJogoProps {
 
 const TelaJogo = (props: TelaJogoProps) => {
 
-    const DESTAQUE_FUNDO_VEZ_JOGADOR = "#FBE9E7";
+    const DESTAQUE_FUNDO_VEZ_JOGADOR = "#FF9185";
 
     const posicoesJaMarcadas: Array<string> = []
     const musicaJogo = useMemo(() => new Audio('/assets/trilha-sonora-piratas.mp3'), [])
@@ -420,10 +420,10 @@ const TelaJogo = (props: TelaJogoProps) => {
                 <h1>BATTLE OF OCEAN</h1>
             </div>
             <div className="container-tabuleiros">
-                <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>É HORA DO ATAQUE</Typography>
+            <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>É HORA DO ATAQUE</Typography>
                 <div className="d-flex justify-content-between">
                     <div style={{ backgroundColor: estaEsperandoInimigoAtirar ? 'initial' : DESTAQUE_FUNDO_VEZ_JOGADOR }}>
-                        <Typography textAlign="center" style={{ fontFamily: "bungee", color: "gray" }}>VOCÊ</Typography>
+                        <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>VOCÊ</Typography>
                         <div style={{ position: 'relative' }}>
                             <PosicaoContainer handlePosicaoOnClick={handlePosicaoOnClick} idPrefix='user' clickable={false} />
                             {progressoJogadorLogado != null && progressoJogadorLogado.naviosTotais.map((iNavio, idxNavio) => {
@@ -478,7 +478,7 @@ const TelaJogo = (props: TelaJogoProps) => {
                         <CircularProgressWithLabel value={progressTimer} />
                     </div>
                     <div style={{ backgroundColor: estaEsperandoInimigoAtirar ? DESTAQUE_FUNDO_VEZ_JOGADOR : 'initial' }}>
-                        <Typography textAlign="center" style={{ fontFamily: "bungee", color: "gray" }}>{nomeInimigo}</Typography>
+                        <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>{nomeInimigo}</Typography>
                         <div style={{ position: 'relative' }}>
                             <PosicaoContainer handlePosicaoOnClick={handlePosicaoOnClick} idPrefix='opponent' clickable={!estaEsperandoInimigoAtirar} backgroundColor="#EBEBEB" />
                             {progressoJogadorInimigo != null && progressoJogadorInimigo.naviosTotais.map((iNavio, idxNavio) => {
@@ -528,10 +528,9 @@ const TelaJogo = (props: TelaJogoProps) => {
                         </div>
                     </div>
                 </div>
-                <Typography textAlign="center" style={{ fontFamily: "bungee", color: "gray", marginTop: '30px' }}>{!estaEsperandoInimigoAtirar ? 'SUA VEZ' : 'AGUARDE O ADVERSÁRIO JOGAR'}</Typography>
+                <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black", marginTop: '30px' }}>{!estaEsperandoInimigoAtirar ? 'SUA VEZ' : 'AGUARDE O ADVERSÁRIO JOGAR'}</Typography>
             </div>
-            
-            <div className="container-anuncio">
+             <div className="container-anuncio">
                 <a target="_blank" rel="noopener noreferrer" href="https://adsense.google.com/intl/pt-BR_br/start/">
                     <img src= { "/assets/propagandas/propaganda_mock"+ numeroPropagandaAnuncio +".png" } alt="Propaganda do Battle of Ocean" width="728" height="90"></img>
                 </a>
