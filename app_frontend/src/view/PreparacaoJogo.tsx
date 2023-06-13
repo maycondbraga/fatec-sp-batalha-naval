@@ -564,7 +564,7 @@ const PreparacaoJogo = (props: PreparacaoJogoProps) => {
                         </div>
                     </div>
 
-                    <Card sx={{ textAlign: 'center', marginTop: '20px' }}>
+                    <Card sx={{ textAlign: 'center', marginTop: '20px', backgroundColor: 'rgba(255, 255, 255, 0.5)' }}>
                         <Button disabled={!podeSelecionarPosicoes} onClick={handleEnviarNavioOnClick} variant="contained" sx={{ marginRight: '32px' }}> Enviar objeto para a posição </Button>
                         <Button disabled={!podeEnviarEstrategia} onClick={handleSalvarEstrategiaOnClick} variant="contained" color="success"> Salvar Estratégia </Button>
                     </Card>

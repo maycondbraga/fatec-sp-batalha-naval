@@ -18,7 +18,6 @@ import ErroModal from '../components/erroModal/ErroModal';
 import ImgNavioHorizontal from '../components/imagem/ImgNavioHorizontal';
 import { PostTiroFluxo } from "../modelos/importarBack/PostTiroFluxo";
 import { MdDetalheTema } from "../modelos/importarBack/MdDetalheTema";
-import shadows from "@mui/material/styles/shadows";
 
 const SEGUNDOS_TIMER = 15;
 
@@ -38,9 +37,6 @@ const CircularProgressWithLabel = (
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: 'white',
-                    opacity: '80%',
-                    color: 'black'
                 }}
             >
                 <Typography
@@ -60,7 +56,7 @@ export interface TelaJogoProps {
 
 const TelaJogo = (props: TelaJogoProps) => {
 
-    const DESTAQUE_FUNDO_VEZ_JOGADOR = "";
+    const DESTAQUE_FUNDO_VEZ_JOGADOR = "#FF9185";
 
     const posicoesJaMarcadas: Array<string> = []
     const musicaJogo = useMemo(() => new Audio('/assets/trilha-sonora-piratas.mp3'), [])
@@ -423,11 +419,11 @@ const TelaJogo = (props: TelaJogoProps) => {
             <div className='titulo-wrapper borda_texto'>
                 <h1>BATTLE OF OCEAN</h1>
             </div>
-            <div className="container-tabuleiros-jogo">
-            <Typography textAlign="center" style={{ fontFamily: "bungee", color: "white" }}>É HORA DO ATAQUE</Typography>
+            <div className="container-tabuleiros">
+            <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>É HORA DO ATAQUE</Typography>
                 <div className="d-flex justify-content-between">
-                    <div style={{ backgroundColor: DESTAQUE_FUNDO_VEZ_JOGADOR }}>
-                        <Typography textAlign="center" style={{ fontFamily: "bungee", color: "white" }}>VOCÊ</Typography>
+                    <div style={{ backgroundColor: estaEsperandoInimigoAtirar ? 'initial' : DESTAQUE_FUNDO_VEZ_JOGADOR }}>
+                        <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>VOCÊ</Typography>
                         <div style={{ position: 'relative' }}>
                             <PosicaoContainer handlePosicaoOnClick={handlePosicaoOnClick} idPrefix='user' clickable={false} />
                             {progressoJogadorLogado != null && progressoJogadorLogado.naviosTotais.map((iNavio, idxNavio) => {
@@ -481,8 +477,8 @@ const TelaJogo = (props: TelaJogoProps) => {
                         </div>
                         <CircularProgressWithLabel value={progressTimer} />
                     </div>
-                    <div style={{ backgroundColor: DESTAQUE_FUNDO_VEZ_JOGADOR }}>
-                        <Typography textAlign="center" style={{ fontFamily: "bungee", color: "white" }}>{nomeInimigo}</Typography>
+                    <div style={{ backgroundColor: estaEsperandoInimigoAtirar ? DESTAQUE_FUNDO_VEZ_JOGADOR : 'initial' }}>
+                        <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black" }}>{nomeInimigo}</Typography>
                         <div style={{ position: 'relative' }}>
                             <PosicaoContainer handlePosicaoOnClick={handlePosicaoOnClick} idPrefix='opponent' clickable={!estaEsperandoInimigoAtirar} backgroundColor="#EBEBEB" />
                             {progressoJogadorInimigo != null && progressoJogadorInimigo.naviosTotais.map((iNavio, idxNavio) => {
@@ -532,8 +528,7 @@ const TelaJogo = (props: TelaJogoProps) => {
                         </div>
                     </div>
                 </div>
-                <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black",
-                 background:"white", opacity:"80%" }}>{!estaEsperandoInimigoAtirar ? 'SUA VEZ' : 'AGUARDE O ADVERSÁRIO JOGAR'}</Typography>
+                <Typography textAlign="center" style={{ fontFamily: "bungee", color: "black", marginTop: '30px' }}>{!estaEsperandoInimigoAtirar ? 'SUA VEZ' : 'AGUARDE O ADVERSÁRIO JOGAR'}</Typography>
             </div>
              <div className="container-anuncio">
                 <a target="_blank" rel="noopener noreferrer" href="https://adsense.google.com/intl/pt-BR_br/start/">
