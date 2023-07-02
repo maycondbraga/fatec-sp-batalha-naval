@@ -1,6 +1,6 @@
 # Battle of Ocean - FATEC SP
 
-Aplicação WEB referente ao game Battle of Ocean desenvolvido pelos alunos da FATEC SP
+Aplicação referente ao game Battle of Ocean (Batalha Naval) desenvolvido pelos alunos da FATEC SP
 
 ## Pré-requisitos
 
@@ -9,9 +9,17 @@ Aplicação WEB referente ao game Battle of Ocean desenvolvido pelos alunos da F
 - MongoDB (Banco de dados)
 - MongoDBCompass (GUI para Banco de dados)
 
-## Linguagem utilizada
+## Softwares utilizados
 
-- TypeScript
+- React (Frontend)
+- TypeScript (Backend)
+- Banco de Dados NoSQL (MongoDB)
+
+## Servidores utilizados
+
+- Servidor para Frontend: [Render](https://render.com/)
+- Servidor para Backend: [Render](https://render.com/)
+- Servidor para Banco de Dados: [MongoDB Atlas](https://www.mongodb.com/atlas)
 
 ## Como iniciar
 
